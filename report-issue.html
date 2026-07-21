@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" />
     <link rel="apple-touch-icon" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script type="module" src="firebase.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script id="tailwind-config">
@@ -200,33 +201,66 @@
 
           <div class="luxury-card rounded-2xl p-container-margin">
             <h2 class="font-headline-md text-headline-md text-primary mb-stack-md">Issue Details</h2>
-            <form class="space-y-4">
+            <form class="space-y-4" id="report-issue-form" novalidate>
               <div>
-                <label class="block text-sm font-label-md text-primary mb-2" for="device">Device Information</label>
-                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="device" name="device" placeholder="Phone model / OS version" type="text" />
+                <label class="block text-sm font-label-md text-primary mb-2" for="category">Issue Category</label>
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="category" name="category" placeholder="e.g. Billing issue" type="text" required />
               </div>
               <div>
-                <label class="block text-sm font-label-md text-primary mb-2" for="version">App Version</label>
-                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="version" name="version" placeholder="e.g. 1.2.3" type="text" />
+                <label class="block text-sm font-label-md text-primary mb-2" for="appVersion">App Version</label>
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="appVersion" name="appVersion" placeholder="e.g. 1.2.3" type="text" required />
               </div>
               <div>
-                <label class="block text-sm font-label-md text-primary mb-2" for="steps">Steps to Reproduce</label>
-                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[90px]" id="steps" name="steps" placeholder="Describe the sequence of actions"></textarea>
+                <label class="block text-sm font-label-md text-primary mb-2" for="androidVersion">Android Version</label>
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="androidVersion" name="androidVersion" placeholder="e.g. Android 14" type="text" required />
               </div>
               <div>
-                <label class="block text-sm font-label-md text-primary mb-2" for="expected">Expected Result</label>
-                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[80px]" id="expected" name="expected" placeholder="What should have happened?"></textarea>
+                <label class="block text-sm font-label-md text-primary mb-2" for="deviceName">Device Name</label>
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="deviceName" name="deviceName" placeholder="Phone model" type="text" required />
               </div>
               <div>
-                <label class="block text-sm font-label-md text-primary mb-2" for="actual">Actual Result</label>
-                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[80px]" id="actual" name="actual" placeholder="What happened instead?"></textarea>
+                <label class="block text-sm font-label-md text-primary mb-2" for="stepsToReproduce">Steps to Reproduce</label>
+                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[90px]" id="stepsToReproduce" name="stepsToReproduce" placeholder="Describe the sequence of actions" required></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-label-md text-primary mb-2" for="expectedResult">Expected Result</label>
+                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[80px]" id="expectedResult" name="expectedResult" placeholder="What should have happened?" required></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-label-md text-primary mb-2" for="actualResult">Actual Result</label>
+                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[80px]" id="actualResult" name="actualResult" placeholder="What happened instead?" required></textarea>
               </div>
               <div>
                 <label class="block text-sm font-label-md text-primary mb-2" for="screenshot">Screenshot Placeholder</label>
                 <div class="rounded-xl border border-dashed border-outline-variant/50 bg-surface-container-lowest px-3 py-6 text-center text-sm text-on-surface-variant">Upload screenshot or attach a note if available.</div>
               </div>
-              <button class="btn-primary font-label-md text-label-md px-6 py-3 rounded-xl w-full" type="submit">Submit Report</button>
+              <button class="btn-primary font-label-md text-label-md px-6 py-3 rounded-xl w-full" id="issue-submit" type="submit">Submit Report</button>
             </form>
+            <script type="module">
+              import { handleFormSubmission, getServerTimestampValue } from "./firebase.js";
+
+              const form = document.getElementById("report-issue-form");
+              const submitButton = document.getElementById("issue-submit");
+
+              handleFormSubmission({
+                form,
+                submitButton,
+                path: "issue_reports",
+                requiredFields: ["category", "appVersion", "androidVersion", "deviceName", "stepsToReproduce", "expectedResult", "actualResult"],
+                buildPayload: (values) => ({
+                  category: values.category.trim(),
+                  appVersion: values.appVersion.trim(),
+                  androidVersion: values.androidVersion.trim(),
+                  deviceName: values.deviceName.trim(),
+                  stepsToReproduce: values.stepsToReproduce.trim(),
+                  expectedResult: values.expectedResult.trim(),
+                  actualResult: values.actualResult.trim(),
+                  platform: "Website",
+                  status: "New",
+                  createdAt: getServerTimestampValue()
+                })
+              });
+            </script>
           </div>
         </div>
       </section>

@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" />
     <link rel="apple-touch-icon" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script type="module" src="firebase.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script id="tailwind-config">
@@ -223,25 +224,47 @@
 
           <div class="luxury-card rounded-2xl p-container-margin">
             <h2 class="font-headline-md text-headline-md text-primary mb-stack-md">Send a Message</h2>
-            <form class="space-y-4">
+            <form class="space-y-4" id="contact-support-form" novalidate>
               <div>
                 <label class="block text-sm font-label-md text-primary mb-2" for="name">Name</label>
-                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="name" name="name" placeholder="Your full name" type="text" />
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="name" name="name" placeholder="Your full name" type="text" required />
               </div>
               <div>
                 <label class="block text-sm font-label-md text-primary mb-2" for="email">Email</label>
-                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="email" name="email" placeholder="you@example.com" type="email" />
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="email" name="email" placeholder="you@example.com" type="email" required />
               </div>
               <div>
                 <label class="block text-sm font-label-md text-primary mb-2" for="subject">Subject</label>
-                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="subject" name="subject" placeholder="How can we help?" type="text" />
+                <input class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none" id="subject" name="subject" placeholder="How can we help?" type="text" required />
               </div>
               <div>
                 <label class="block text-sm font-label-md text-primary mb-2" for="message">Message</label>
-                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[120px]" id="message" name="message" placeholder="Share your issue, request, or feedback"></textarea>
+                <textarea class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-3 py-3 text-sm outline-none min-h-[120px]" id="message" name="message" placeholder="Share your issue, request, or feedback" required></textarea>
               </div>
-              <button class="btn-primary font-label-md text-label-md px-6 py-3 rounded-xl w-full" type="submit">Submit Request</button>
+              <button class="btn-primary font-label-md text-label-md px-6 py-3 rounded-xl w-full" id="contact-submit" type="submit">Submit Request</button>
             </form>
+            <script type="module">
+              import { handleFormSubmission, getServerTimestampValue } from "./firebase.js";
+
+              const form = document.getElementById("contact-support-form");
+              const submitButton = document.getElementById("contact-submit");
+
+              handleFormSubmission({
+                form,
+                submitButton,
+                path: "contact_messages",
+                requiredFields: ["name", "email", "subject", "message"],
+                buildPayload: (values) => ({
+                  name: values.name.trim(),
+                  email: values.email.trim(),
+                  subject: values.subject.trim(),
+                  message: values.message.trim(),
+                  platform: "Website",
+                  status: "New",
+                  createdAt: getServerTimestampValue()
+                })
+              });
+            </script>
           </div>
         </div>
       </section>
