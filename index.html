@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TimeBill - Professional Time Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#fbb5ab",
+                      "tertiary-fixed-dim": "#a3d0bf",
+                      "surface-tint": "#82524c",
+                      "inverse-on-surface": "#ffedea",
+                      "primary-fixed": "#ffdad6",
+                      "surface": "#fff8f6",
+                      "tertiary-fixed": "#beecda",
+                      "tertiary-container": "#053529",
+                      "secondary-container": "#feb8ae",
+                      "surface-container-low": "#fff0ee",
+                      "on-secondary-fixed-variant": "#6a3932",
+                      "outline-variant": "#d6c2c0",
+                      "secondary-fixed": "#ffdad5",
+                      "on-error": "#ffffff",
+                      "surface-container": "#ffe9e6",
+                      "on-secondary-fixed": "#350f0b",
+                      "on-background": "#2a1614",
+                      "inverse-surface": "#412b27",
+                      "primary": "#310f0c",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#673b36",
+                      "on-primary-fixed": "#33110e",
+                      "surface-bright": "#fff8f6",
+                      "on-tertiary-fixed-variant": "#244e41",
+                      "on-surface-variant": "#514442",
+                      "on-tertiary-container": "#739f8f",
+                      "error": "#ba1a1a",
+                      "outline": "#847371",
+                      "on-secondary-container": "#7a463f",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#ffe2dd",
+                      "on-surface": "#2a1614",
+                      "background": "#fff8f6",
+                      "surface-variant": "#ffdad5",
+                      "inverse-primary": "#f6b7b0",
+                      "surface-dim": "#f6d2cc",
+                      "on-tertiary-fixed": "#002118",
+                      "primary-container": "#4a231f",
+                      "tertiary": "#001e16",
+                      "error-container": "#ffdad6",
+                      "surface-container-highest": "#ffdad5",
+                      "secondary": "#865048",
+                      "on-primary-container": "#c08881",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#f6b7b0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "64px",
+                      "unit": "8px",
+                      "stack-sm": "8px",
+                      "stack-lg": "32px",
+                      "container-margin": "24px",
+                      "gutter": "16px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "display-lg-mobile": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "display-lg-mobile": ["36px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F5ECDD;
+            color: #2a1614;
+        }
+        .glass-header {
+            background: rgba(245, 236, 221, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .luxury-card {
+            background-color: #F8F4EF;
+            box-shadow: 0px 4px 20px rgba(74, 35, 31, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .luxury-card:active {
+            transform: scale(0.98);
+        }
+        .btn-primary {
+            background-color: #4A231F;
+            color: white;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .btn-primary:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+        .btn-secondary {
+            border: 1px solid #E4D8C8;
+            color: #4A231F;
+            background-color: transparent;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .btn-secondary:active {
+            transform: scale(0.95);
+            background-color: rgba(228, 216, 200, 0.3);
+        }
+        .gold-accent {
+            color: #D4AE7A;
+        }
+        .divider {
+            height: 1px;
+            background-color: #E4D8C8;
+            margin: 0 16px;
+        }
+        .badge-subtle {
+            background-color: rgba(107, 58, 51, 0.1);
+            color: #6B3A33;
+        }
+    </style>
+</head>
+<body class="antialiased font-body-md text-body-md min-h-screen flex flex-col">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 w-full z-50 glass-header px-container-margin py-stack-md flex justify-between items-center md:hidden">
+<div class="flex items-center gap-2">
+<img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill icon" class="w-8 h-8 object-cover rounded-full" />
+<span class="font-headline-md text-headline-md text-primary tracking-tight">TimeBill</span>
+</div>
+<button class="btn-primary font-label-md text-label-md px-4 py-2 rounded-full">Get Started</button>
+</header>
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center left-0 right-0 w-full px-container-margin py-stack-md fixed top-0 z-50 bg-surface/40 backdrop-blur-md border-b border-outline-variant/20 shadow-sm">
+<div class="flex items-center gap-3 text-headline-md font-headline-lg tracking-tight text-primary">
+<img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill icon" class="w-8 h-8 object-cover rounded-full" />
+<span>TimeBill</span>
+</div>
+<div class="flex gap-stack-lg">
+<a class="text-primary font-semibold border-b-2 border-secondary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="#">FAQ</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="#">Contact</a>
+</div>
+<button class="btn-primary font-label-md text-label-md px-6 py-2 rounded-full active:scale-95 transition-transform duration-200">Get Started</button>
+</nav>
+<main class="flex-grow pt-[88px] md:pt-[104px]">
+<!-- Hero Section -->
+<section class="px-container-margin py-section-gap flex flex-col items-center text-center max-w-3xl mx-auto">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-subtle font-label-sm text-label-sm mb-stack-lg">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
+                Professional Time Tracking
+            </div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary mb-stack-md">
+                Track Every Minute.<br/>Bill Every Hour.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl">
+                The minimalist time tracker designed for high-value professionals. Calculate earnings in real-time, generate stunning reports, and never lose a billable minute again.
+            </p>
+<div class="flex flex-col sm:flex-row gap-stack-sm w-full sm:w-auto">
+<button class="btn-primary font-label-md text-label-md px-8 py-4 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto">
+<span class="material-symbols-outlined" data-icon="play_arrow" data-weight="fill">play_arrow</span>
+                    Download on Google Play
+                </button>
+</div>
+<div class="mt-section-gap w-full relative">
+<!-- 3D Phone Mockup Placeholder -->
+<div class="relative w-full max-w-sm mx-auto aspect-[1/2] rounded-[2rem] overflow-hidden shadow-2xl luxury-card">
+<img alt="TimeBill App 3D Mockup" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuDdwHOOM81UrxaM88iX-2UlG_m8IMkKNshuvUI59-M7VK__GYQpcKKW6eDAqH0ptOZyhIVV-KBblfz2GK7umX6Zs2dbdJwTsqp4eSrerg1ARsQwKF1XGCv_p6y7at2LlPci5V4vN727jeCu6VMu_detrmyqTHUdRUP7ThSKDGBB5-no7GiyGdzzebZiCUhV7eaVPUEKvGIXxqUIOGFXZFOPUiNAuTV55v_EA9x0iIXVniTqu2gtScuTsFb"/>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute top-1/4 -left-4 w-24 h-24 bg-surface rounded-2xl shadow-xl luxury-card flex flex-col items-center justify-center hidden md:flex">
+<span class="material-symbols-outlined text-primary text-3xl mb-1" data-icon="timer">timer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active</span>
+</div>
+<div class="absolute bottom-1/3 -right-4 w-32 h-16 bg-surface rounded-xl shadow-xl luxury-card flex items-center justify-center hidden md:flex">
+<span class="font-headline-md text-headline-md text-primary">₹15.4k</span>
+</div>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="py-stack-lg border-y border-outline-variant/30 bg-surface-container-lowest/50">
+<div class="max-w-7xl mx-auto px-container-margin text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-stack-md">Trusted by Freelancers, Developers, and Agencies</p>
+<div class="flex flex-wrap justify-center gap-8 opacity-60 grayscale">
+<!-- Client Logos placeholders (using icons for now) -->
+<span class="material-symbols-outlined text-4xl" data-icon="corporate_fare">corporate_fare</span>
+<span class="material-symbols-outlined text-4xl" data-icon="business">business</span>
+<span class="material-symbols-outlined text-4xl" data-icon="apartment">apartment</span>
+<span class="material-symbols-outlined text-4xl" data-icon="domain">domain</span>
+</div>
+</div>
+</section>
+<!-- Features (Vertical Stack) -->
+<section class="px-container-margin py-section-gap max-w-md mx-auto md:max-w-7xl">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-section-gap">Precision Engineering for Your Workflow</h2>
+<div class="flex flex-col gap-stack-lg">
+<!-- Feature 1 -->
+<div class="luxury-card rounded-2xl p-container-margin flex flex-col md:flex-row md:items-center gap-container-margin">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Start/Stop Timer</h3>
+<p class="text-on-surface-variant">One-tap precision tracking. Focus on your work, while we seamlessly record every billable second in the background.</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="luxury-card rounded-2xl p-container-margin flex flex-col md:flex-row md:items-center gap-container-margin">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Hourly Billing</h3>
+<p class="text-on-surface-variant">Set custom rates per project or client. Watch your earnings calculate in real-time as the timer runs.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="luxury-card rounded-2xl p-container-margin flex flex-col md:flex-row md:items-center gap-container-margin">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Daily Analytics</h3>
+<p class="text-on-surface-variant">Visualize your productivity with elegant charts. Understand where your time goes and optimize your output.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Why TimeBill (Bento Grid) -->
+<section class="px-container-margin py-section-gap max-w-7xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-lg">Why Choose TimeBill</h2>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-stack-md">
+<!-- Bento Item 1: Live Earnings (Spans 8 cols on desktop) -->
+<div class="md:col-span-8 luxury-card rounded-3xl p-container-margin relative overflow-hidden min-h-[300px] flex flex-col justify-end">
+<div class="absolute top-container-margin left-container-margin">
+<h3 class="font-headline-md text-headline-md text-primary">Live Earnings</h3>
+<p class="text-on-surface-variant text-sm mt-1 max-w-xs">See your value accumulate second by second. Motivation built right into the timer.</p>
+</div>
+<div class="mt-auto">
+<div class="text-display-lg-mobile font-display-lg-mobile text-primary-container tracking-tight">
+                             ₹24,500<span class="text-headline-md text-on-surface-variant">.00</span>
+</div>
+<div class="w-full h-2 bg-outline-variant/30 rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-primary-container w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Bento Item 2: Productivity (Spans 4 cols on desktop) -->
+<div class="md:col-span-4 luxury-card rounded-3xl p-container-margin flex flex-col items-center justify-center text-center min-h-[300px]">
+<div class="w-16 h-16 rounded-full border-4 border-secondary/20 flex items-center justify-center mb-stack-md relative">
+<svg class="absolute inset-0 w-full h-full text-secondary" viewbox="0 0 36 36">
+<path class="text-outline-variant/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="85, 100" stroke-width="3"></path>
+</svg>
+<span class="font-headline-md text-headline-md text-primary">85%</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-1">Productivity</h3>
+<p class="text-on-surface-variant text-sm">Focus score for this week.</p>
+</div>
+<!-- Bento Item 3: Professional Reports (Spans full width) -->
+<div class="md:col-span-12 luxury-card rounded-3xl p-container-margin flex flex-col md:flex-row items-center gap-container-margin">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Professional Reports</h3>
+<p class="text-on-surface-variant">Export detailed, pixel-perfect PDF and CSV reports ready to be sent directly to your clients. Luxury branding included.</p>
+</div>
+<div class="w-full md:w-1/3 h-32 bg-surface-container rounded-xl flex items-center justify-center border border-outline-variant/50">
+<span class="material-symbols-outlined text-4xl text-primary/40" data-icon="description">description</span>
+</div>
+</div>
+</div>
+</section>
+<!-- How it Works (Vertical Timeline) -->
+<section class="px-container-margin py-section-gap bg-surface-container-low max-w-md mx-auto md:max-w-full">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-stack-lg">The Workflow</h2>
+<div class="relative pl-8 md:pl-0 border-l md:border-l-0 border-outline-variant/30 space-y-12">
+<!-- Step 1 -->
+<div class="relative md:flex md:items-center md:justify-between group">
+<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
+<div class="w-3 h-3 bg-secondary rounded-full group-hover:scale-125 transition-transform"></div>
+</div>
+<div class="md:w-5/12 md:text-right pr-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary mb-1">1. Set Rate</h3>
+<p class="text-on-surface-variant text-sm">Define your hourly rate per project.</p>
+</div>
+<div class="hidden md:block md:w-5/12"></div>
+<div class="hidden md:block absolute left-1/2 top-0 bottom-[-48px] border-l border-outline-variant/30"></div>
+</div>
+<!-- Step 2 -->
+<div class="relative md:flex md:items-center md:justify-between md:flex-row-reverse group">
+<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
+<div class="w-3 h-3 bg-secondary rounded-full group-hover:scale-125 transition-transform"></div>
+</div>
+<div class="md:w-5/12 pl-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary mb-1">2. Start Timer</h3>
+<p class="text-on-surface-variant text-sm">One tap to begin recording time.</p>
+</div>
+<div class="hidden md:block md:w-5/12"></div>
+<div class="hidden md:block absolute left-1/2 top-0 bottom-[-48px] border-l border-outline-variant/30"></div>
+</div>
+<!-- Step 3 -->
+<div class="relative md:flex md:items-center md:justify-between group">
+<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
+<div class="w-3 h-3 bg-secondary rounded-full group-hover:scale-125 transition-transform"></div>
+</div>
+<div class="md:w-5/12 md:text-right pr-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary mb-1">3. Stop Session</h3>
+<p class="text-on-surface-variant text-sm">Complete your work block.</p>
+</div>
+<div class="hidden md:block md:w-5/12"></div>
+<div class="hidden md:block absolute left-1/2 top-0 bottom-[-48px] border-l border-outline-variant/30"></div>
+</div>
+<!-- Step 4 -->
+<div class="relative md:flex md:items-center md:justify-between md:flex-row-reverse group">
+<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span>
+</div>
+<div class="md:w-5/12 pl-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary mb-1">4. Automatic Earnings</h3>
+<p class="text-on-surface-variant text-sm">Review calculated earnings instantly.</p>
+</div>
+<div class="hidden md:block md:w-5/12"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Statistics -->
+<section class="px-container-margin py-section-gap max-w-7xl mx-auto text-center">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="luxury-card rounded-2xl p-stack-lg">
+<div class="font-display-lg text-display-lg text-primary mb-2">100K+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wide">Hours Tracked</div>
+</div>
+<div class="luxury-card rounded-2xl p-stack-lg">
+<div class="font-display-lg text-display-lg text-primary mb-2">₹ Millions</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wide">Calculated</div>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section class="px-container-margin py-section-gap max-w-3xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-stack-lg">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<details class="group luxury-card rounded-xl overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-stack-md cursor-pointer list-none font-headline-md text-headline-md text-primary text-lg">
+<span>Is there a free tier?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</span>
+</summary>
+<div class="p-stack-md pt-0 text-on-surface-variant border-t border-outline-variant/20 mt-2">
+                        Yes, TimeBill offers a generous free tier perfect for solo freelancers managing up to 3 active projects.
+                    </div>
+</details>
+<details class="group luxury-card rounded-xl overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-stack-md cursor-pointer list-none font-headline-md text-headline-md text-primary text-lg">
+<span>Can I export my data?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</span>
+</summary>
+<div class="p-stack-md pt-0 text-on-surface-variant border-t border-outline-variant/20 mt-2">
+                        Absolutely. You can export all timesheets and reports to CSV or beautiful PDF formats anytime.
+                    </div>
+</details>
+<details class="group luxury-card rounded-xl overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-stack-md cursor-pointer list-none font-headline-md text-headline-md text-primary text-lg">
+<span>Does it work offline?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</span>
+</summary>
+<div class="p-stack-md pt-0 text-on-surface-variant border-t border-outline-variant/20 mt-2">
+                        Yes, your timer will continue to run and save data locally. It will sync automatically once you reconnect.
+                    </div>
+</details>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim w-full rounded-t-xl border-t border-outline-variant/30 text-on-surface dark:text-on-surface mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg max-w-7xl mx-auto px-container-margin py-section-gap font-body-md text-body-md">
+<!-- Brand Column -->
+<div class="md:col-span-1 flex flex-col gap-stack-sm">
+<div class="text-headline-md font-headline-md text-primary dark:text-primary-fixed-dim flex items-center gap-2">
+<img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill icon" class="w-8 h-8 object-cover rounded-full" />
+                    TimeBill
+                </div>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-4">
+                    © 2024 TimeBill. All rights reserved. Crafted for precision.
+                </p>
+</div>
+<!-- Links Columns -->
+<div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-stack-md">
+<div class="flex flex-col gap-stack-sm">
+<h4 class="font-label-md text-label-md text-primary font-semibold mb-2">Legal</h4>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="#">Cookie Policy</a>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<h4 class="font-label-md text-label-md text-primary font-semibold mb-2">Company</h4>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="#">Support</a>
+</div>
+<div class="flex flex-col gap-stack-sm col-span-2 sm:col-span-1">
+<h4 class="font-label-md text-label-md text-primary font-semibold mb-2">Connect</h4>
+<div class="flex gap-4">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">
+                            Twitter
+                        </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">
+                            LinkedIn
+                        </a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
