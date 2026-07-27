@@ -78,7 +78,105 @@ function containsHeaderInjection(string $value): bool {
     return preg_match('/(?:\r|\n|%0d|%0a)/i', $value) === 1;
 }
 
-function buildHtmlEmail(array $data): string {
+function buildAttachmentFilename(string $invoiceNo): string {
+    $safeInvoice = preg_replace('/[^A-Za-z0-9._-]+/', '-', trim($invoiceNo)) ?: 'invoice';
+    return 'Invoice-' . $safeInvoice . '.pdf';
+}
+
+function detectPdfMime(string $filePath): ?string {
+    $header = @file_get_contents($filePath, false, null, 0, 5);
+    if ($header !== false && strpos($header, '%PDF') === 0) {
+        return 'application/pdf';
+    }
+
+    if (function_exists('finfo_open')) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        if ($finfo !== false) {
+            $mime = finfo_file($finfo, $filePath);
+            finfo_close($finfo);
+            if ($mime !== false) {
+                return $mime;
+            }
+        }
+    }
+
+    if (function_exists('mime_content_type')) {
+        $mime = mime_content_type($filePath);
+        if ($mime !== false) {
+            return $mime;
+        }
+    }
+
+    return null;
+}
+
+function parseIncomingRequest(): array {
+    $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+    $isJson = stripos($contentType, 'application/json') !== false;
+    $isMultipart = stripos($contentType, 'multipart/form-data') !== false;
+
+    if ($isJson) {
+        $rawBody = file_get_contents('php://input');
+        if ($rawBody === false || trim($rawBody) === '') {
+            jsonResponse(400, ['success' => false, 'message' => 'Request body is required.']);
+        }
+
+        $decoded = json_decode($rawBody, true);
+        if (!is_array($decoded) || json_last_error() !== JSON_ERROR_NONE) {
+            jsonResponse(400, ['success' => false, 'message' => 'Request body must be valid JSON.']);
+        }
+
+        return ['type' => 'json', 'data' => $decoded, 'attachment' => null];
+    }
+
+    if ($isMultipart) {
+        $data = [];
+        foreach ($_POST as $key => $value) {
+            $data[$key] = is_string($value) ? sanitizeText($value) : $value;
+        }
+
+        if (!isset($_FILES['invoice_pdf']) || !is_array($_FILES['invoice_pdf'])) {
+            jsonResponse(422, ['success' => false, 'message' => 'invoice_pdf is required for multipart/form-data requests.']);
+        }
+
+        $file = $_FILES['invoice_pdf'];
+        if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+            jsonResponse(422, ['success' => false, 'message' => 'invoice_pdf is required for multipart/form-data requests.']);
+        }
+
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            jsonResponse(422, ['success' => false, 'message' => 'The uploaded file has an error.']);
+        }
+
+        if (!is_uploaded_file($file['tmp_name'])) {
+            jsonResponse(422, ['success' => false, 'message' => 'Invalid uploaded file.']);
+        }
+
+        $maxSize = 10 * 1024 * 1024;
+        if ($file['size'] > $maxSize) {
+            jsonResponse(422, ['success' => false, 'message' => 'The uploaded PDF must be 10 MB or smaller.']);
+        }
+
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if ($extension !== 'pdf') {
+            jsonResponse(422, ['success' => false, 'message' => 'Only PDF files are allowed.']);
+        }
+
+        $mime = detectPdfMime($file['tmp_name']);
+        if ($mime !== 'application/pdf') {
+            jsonResponse(422, ['success' => false, 'message' => 'Only PDF files are allowed.']);
+        }
+
+        return ['type' => 'multipart', 'data' => $data, 'attachment' => [
+            'tmp_name' => $file['tmp_name'],
+            'name' => $file['name'],
+        ]];
+    }
+
+    jsonResponse(415, ['success' => false, 'message' => 'Content-Type must be application/json or multipart/form-data.']);
+}
+
+function buildHtmlEmail(array $data, bool $hasAttachment = false): string {
     $statusText = htmlspecialchars(sanitizeText($data['status'] ?? 'Pending'), ENT_QUOTES, 'UTF-8');
     $invoiceNo = htmlspecialchars(sanitizeText($data['invoice_no'] ?? ''), ENT_QUOTES, 'UTF-8');
     $clientName = htmlspecialchars(sanitizeText($data['client_name'] ?? ''), ENT_QUOTES, 'UTF-8');
@@ -96,6 +194,9 @@ function buildHtmlEmail(array $data): string {
     $businessEmail = htmlspecialchars(sanitizeEmail($data['business_email'] ?? ''), ENT_QUOTES, 'UTF-8');
     $businessPhone = htmlspecialchars(sanitizeText($data['business_phone'] ?? ''), ENT_QUOTES, 'UTF-8');
     $businessAddress = nl2br(htmlspecialchars(sanitizeText($data['business_address'] ?? ''), ENT_QUOTES, 'UTF-8'));
+    $attachmentNote = $hasAttachment
+        ? '<p style="margin:8px 0 0;font-size:14px;line-height:1.6;color:#e0f2fe;">The invoice PDF is attached to this email for your records.</p>'
+        : '';
 
     return <<<HTML
 <!DOCTYPE html>
@@ -114,6 +215,7 @@ function buildHtmlEmail(array $data): string {
           <td valign="top">
             <h1 style="margin:0 0 8px;font-size:30px;line-height:1.2;color:#ffffff;">Invoice Ready</h1>
             <p style="margin:0;font-size:15px;line-height:1.6;color:#e0f2fe;">Hello {$clientName}, thank you for your continued trust. Your invoice is prepared and ready for your review.</p>
+            {$attachmentNote}
           </td>
           <td align="right" valign="top" style="padding-left:12px;">
             <div style="display:inline-block;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:10px 14px;font-size:13px;font-weight:bold;color:#ffffff;">TimeBill</div>
@@ -262,20 +364,9 @@ if ($expectedApiKey === '' || !hash_equals($expectedApiKey, $apiKey)) {
     jsonResponse(403, ['success' => false, 'message' => 'Invalid API key.']);
 }
 
-$contentType = $_SERVER['CONTENT_TYPE'] ?? '';
-if ($contentType === '' || stripos($contentType, 'application/json') === false) {
-    jsonResponse(415, ['success' => false, 'message' => 'Content-Type must be application/json.']);
-}
-
-$rawBody = file_get_contents('php://input');
-if ($rawBody === false || trim($rawBody) === '') {
-    jsonResponse(400, ['success' => false, 'message' => 'Request body is required.']);
-}
-
-$decoded = json_decode($rawBody, true);
-if (!is_array($decoded) || json_last_error() !== JSON_ERROR_NONE) {
-    jsonResponse(400, ['success' => false, 'message' => 'Request body must be valid JSON.']);
-}
+$incoming = parseIncomingRequest();
+$decoded = $incoming['data'];
+$attachment = $incoming['attachment'];
 
 $errors = validateRequiredFields($decoded);
 if ($errors) {
@@ -312,6 +403,9 @@ if (!filter_var($data['business_email'], FILTER_VALIDATE_EMAIL)) {
     jsonResponse(422, ['success' => false, 'message' => 'Business email is invalid.']);
 }
 
+$hasAttachment = false;
+$tempAttachmentPath = null;
+
 try {
     $mail = new PHPMailer(true);
     $mail->isSMTP();
@@ -326,7 +420,15 @@ try {
     $mail->addReplyTo($config['smtp']['from_email'], $config['smtp']['from_name']);
     $mail->Subject = 'Invoice #' . $data['invoice_no'] . ' from TimeBill';
     $mail->isHTML(true);
-    $mail->Body = buildHtmlEmail($data);
+
+    if ($attachment !== null) {
+        $tempAttachmentPath = $attachment['tmp_name'];
+        $attachmentName = buildAttachmentFilename($data['invoice_no']);
+        $mail->addAttachment($tempAttachmentPath, $attachmentName);
+        $hasAttachment = true;
+    }
+
+    $mail->Body = buildHtmlEmail($data, $hasAttachment);
     $mail->AltBody = "Invoice {$data['invoice_no']} from TimeBill\n\nGenerated: {$data['generated_date']} at {$data['generated_time']}\nStatus: {$data['status']}\nTotal: {$data['total']}";
 
     $mail->send();
