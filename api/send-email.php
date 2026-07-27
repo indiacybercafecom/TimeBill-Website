@@ -105,79 +105,124 @@ function buildHtmlEmail(array $data): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invoice from TimeBill</title>
 </head>
-<body style="margin:0;padding:0;background-color:#f4f7fb;font-family:Arial,sans-serif;color:#1f2937;">
-  <div style="max-width:700px;margin:24px auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.08);">
-    <div style="background:linear-gradient(135deg,#2563eb,#1d4ed8);padding:28px 32px;color:#ffffff;">
-      <h1 style="margin:0 0 8px;font-size:28px;">Invoice Ready</h1>
-      <p style="margin:0;font-size:15px;opacity:0.95;">Professional billing delivered by TimeBill</p>
-    </div>
-    <div style="padding:32px;">
-      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
-        <div>
-          <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Invoice</p>
-          <h2 style="margin:0;font-size:22px;color:#111827;">{$invoiceNo}</h2>
-        </div>
-        <div style="text-align:right;">
-          <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Status</p>
-          <span style="display:inline-block;padding:7px 12px;border-radius:999px;background:#dcfce7;color:#166534;font-weight:bold;font-size:13px;">{$statusText}</span>
-        </div>
-      </div>
-
-      <div style="border:1px solid #e5e7eb;border-radius:10px;padding:16px 18px;margin-bottom:20px;background:#f9fafb;">
-        <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Generated</p>
-        <p style="margin:0;font-size:15px;color:#111827;">{$generatedDate} at {$generatedTime}</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
-        <div style="border:1px solid #e5e7eb;border-radius:10px;padding:16px 18px;background:#ffffff;">
-          <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Bill From</p>
-          <p style="margin:0;font-weight:bold;color:#111827;">{$businessName}</p>
-          <p style="margin:4px 0 0;color:#4b5563;">{$businessEmail}</p>
-          <p style="margin:4px 0 0;color:#4b5563;">{$businessPhone}</p>
-          <p style="margin:8px 0 0;color:#4b5563;">{$businessAddress}</p>
-        </div>
-        <div style="border:1px solid #e5e7eb;border-radius:10px;padding:16px 18px;background:#ffffff;">
-          <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Bill To</p>
-          <p style="margin:0;font-weight:bold;color:#111827;">{$clientName}</p>
-          <p style="margin:4px 0 0;color:#4b5563;">{$clientEmail}</p>
-        </div>
-      </div>
-
-      <div style="border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:20px;">
-        <div style="background:#f9fafb;padding:14px 18px;border-bottom:1px solid #e5e7eb;">
-          <h3 style="margin:0;font-size:16px;color:#111827;">Work Details</h3>
-        </div>
-        <div style="padding:18px;">
-          <p style="margin:0 0 10px;"><strong>Work Name:</strong> {$workName}</p>
-          <p style="margin:0 0 10px;"><strong>Duration:</strong> {$duration}</p>
-          <p style="margin:0 0 10px;"><strong>Rate:</strong> {$rate}</p>
-          <p style="margin:0;"><strong>Amount:</strong> {$amount}</p>
-        </div>
-      </div>
-
-      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
-        <tbody>
-          <tr style="background:#f9fafb;">
-            <td style="padding:12px 16px;border-bottom:1px solid #e5e7eb;font-weight:bold;color:#111827;">Item</td>
-            <td style="padding:12px 16px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:bold;color:#111827;">Value</td>
-          </tr>
-          <tr>
-            <td style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#4b5563;">Subtotal</td>
-            <td style="padding:12px 16px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{$subtotal}</td>
-          </tr>
-          <tr>
-            <td style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#4b5563;">Tax</td>
-            <td style="padding:12px 16px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{$tax}</td>
-          </tr>
-          <tr style="background:#eff6ff;">
-            <td style="padding:12px 16px;font-weight:bold;color:#111827;">Total</td>
-            <td style="padding:12px 16px;text-align:right;font-weight:bold;color:#2563eb;">{$total}</td>
-          </tr>
-        </tbody>
+<body style="margin:0;padding:24px 12px;background-color:#f4f7fb;font-family:Arial, Helvetica, sans-serif;color:#14213d;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="background:linear-gradient(135deg,#143b8a 0%,#2563eb 100%);border-radius:24px 24px 0 0;padding:32px 32px 24px;color:#ffffff;">
+      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#dbeafe;margin-bottom:8px;">TimeBill Invoice</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td valign="top">
+            <h1 style="margin:0 0 8px;font-size:30px;line-height:1.2;color:#ffffff;">Invoice Ready</h1>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:#e0f2fe;">Hello {$clientName}, thank you for your continued trust. Your invoice is prepared and ready for your review.</p>
+          </td>
+          <td align="right" valign="top" style="padding-left:12px;">
+            <div style="display:inline-block;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:10px 14px;font-size:13px;font-weight:bold;color:#ffffff;">TimeBill</div>
+          </td>
+        </tr>
       </table>
     </div>
-    <div style="background:#f8fafc;padding:20px 32px;border-top:1px solid #e5e7eb;text-align:center;color:#6b7280;font-size:13px;line-height:1.6;">
-      <p style="margin:0 0 6px;">Generated by TimeBill</p>
+
+    <div style="background:#ffffff;padding:28px;border-radius:0 0 24px 24px;box-shadow:0 12px 30px rgba(15,23,42,0.08);">
+      <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#475569;">Thank you for choosing TimeBill. Your invoice is prepared with a polished summary below and the complete PDF attachment is included for your convenience.</p>
+
+      <div style="background:#f8fbff;border:1px solid #e2ecfb;border-radius:18px;padding:20px;margin-bottom:18px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#64748b;padding-bottom:10px;">Invoice Details</td>
+          </tr>
+          <tr>
+            <td>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding:6px 0;font-size:14px;color:#64748b;">Invoice Number</td>
+                  <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$invoiceNo}</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0;font-size:14px;color:#64748b;">Invoice Date</td>
+                  <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$generatedDate} at {$generatedTime}</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0;font-size:14px;color:#64748b;">Work Name</td>
+                  <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$workName}</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0;font-size:14px;color:#64748b;">Duration</td>
+                  <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$duration}</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0;font-size:14px;color:#64748b;">Rate</td>
+                  <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$rate}</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0;font-size:14px;color:#64748b;">Amount</td>
+                  <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$amount}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background:#ffffff;border:1px solid #eaf1ff;border-radius:18px;padding:20px;box-shadow:0 6px 18px rgba(37,99,235,0.07);margin-bottom:18px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#64748b;padding-bottom:8px;">Payment Summary</td>
+          </tr>
+          <tr>
+            <td style="font-size:14px;color:#64748b;">Total Amount</td>
+            <td style="font-size:28px;color:#1d4ed8;font-weight:bold;text-align:right;">{$total}</td>
+          </tr>
+          <tr>
+            <td style="padding-top:10px;font-size:14px;color:#64748b;">Payment Status</td>
+            <td style="padding-top:10px;text-align:right;">
+              <span style="display:inline-block;background:#dcfce7;color:#166534;padding:8px 12px;border-radius:999px;font-size:13px;font-weight:bold;">{$statusText}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background:#f8fbff;border:1px solid #e2ecfb;border-radius:18px;padding:18px 20px;margin-bottom:18px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#64748b;padding-bottom:8px;">Invoice Breakdown</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0;font-size:14px;color:#64748b;">Subtotal</td>
+            <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$subtotal}</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0;font-size:14px;color:#64748b;">Tax</td>
+            <td style="padding:6px 0;font-size:14px;color:#14213d;font-weight:bold;text-align:right;">{$tax}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0 0;font-size:15px;color:#14213d;font-weight:bold;">Total</td>
+            <td style="padding:8px 0 0;font-size:15px;color:#1d4ed8;font-weight:bold;text-align:right;">{$total}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#eff6ff 0%,#f8fbff 100%);border:1px solid #dbeafe;border-radius:18px;padding:20px;margin-bottom:18px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="48" valign="top" style="font-size:28px;line-height:1;">📎</td>
+            <td valign="top">
+              <div style="font-size:16px;font-weight:bold;color:#1e3a8a;margin-bottom:4px;">Invoice Attached (PDF)</div>
+              <div style="font-size:14px;line-height:1.6;color:#475569;">The complete invoice is attached as a PDF for easy download, sharing, and record keeping.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="border-top:1px solid #e2e8f0;padding-top:16px;font-size:13px;line-height:1.7;color:#64748b;">
+        <p style="margin:0 0 6px;"><strong>Bill From</strong></p>
+        <p style="margin:0 0 6px;">{$businessName}</p>
+        <p style="margin:0 0 6px;">{$businessEmail} · {$businessPhone}</p>
+        <p style="margin:0;">{$businessAddress}</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:20px 12px 4px;color:#64748b;font-size:12px;line-height:1.7;">
+      <p style="margin:0 0 4px;">© 2026 TimeBill. All rights reserved.</p>
       <a href="https://timebill.indiacybercafe.com" style="color:#2563eb;text-decoration:none;">https://timebill.indiacybercafe.com</a>
     </div>
   </div>
