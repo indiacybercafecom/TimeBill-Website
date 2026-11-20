@@ -1,451 +1,160 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>TimeBill - Professional Time Tracking</title>
-<link rel="icon" type="image/png" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" />
-<link rel="apple-touch-icon" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" />
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "on-secondary": "#ffffff",
-                      "secondary-fixed-dim": "#fbb5ab",
-                      "tertiary-fixed-dim": "#a3d0bf",
-                      "surface-tint": "#82524c",
-                      "inverse-on-surface": "#ffedea",
-                      "primary-fixed": "#ffdad6",
-                      "surface": "#fff8f6",
-                      "tertiary-fixed": "#beecda",
-                      "tertiary-container": "#053529",
-                      "secondary-container": "#feb8ae",
-                      "surface-container-low": "#fff0ee",
-                      "on-secondary-fixed-variant": "#6a3932",
-                      "outline-variant": "#d6c2c0",
-                      "secondary-fixed": "#ffdad5",
-                      "on-error": "#ffffff",
-                      "surface-container": "#ffe9e6",
-                      "on-secondary-fixed": "#350f0b",
-                      "on-background": "#2a1614",
-                      "inverse-surface": "#412b27",
-                      "primary": "#310f0c",
-                      "on-tertiary": "#ffffff",
-                      "on-primary-fixed-variant": "#673b36",
-                      "on-primary-fixed": "#33110e",
-                      "surface-bright": "#fff8f6",
-                      "on-tertiary-fixed-variant": "#244e41",
-                      "on-surface-variant": "#514442",
-                      "on-tertiary-container": "#739f8f",
-                      "error": "#ba1a1a",
-                      "outline": "#847371",
-                      "on-secondary-container": "#7a463f",
-                      "on-primary": "#ffffff",
-                      "surface-container-lowest": "#ffffff",
-                      "surface-container-high": "#ffe2dd",
-                      "on-surface": "#2a1614",
-                      "background": "#fff8f6",
-                      "surface-variant": "#ffdad5",
-                      "inverse-primary": "#f6b7b0",
-                      "surface-dim": "#f6d2cc",
-                      "on-tertiary-fixed": "#002118",
-                      "primary-container": "#4a231f",
-                      "tertiary": "#001e16",
-                      "error-container": "#ffdad6",
-                      "surface-container-highest": "#ffdad5",
-                      "secondary": "#865048",
-                      "on-primary-container": "#c08881",
-                      "on-error-container": "#93000a",
-                      "primary-fixed-dim": "#f6b7b0"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "section-gap": "64px",
-                      "unit": "8px",
-                      "stack-sm": "8px",
-                      "stack-lg": "32px",
-                      "container-margin": "24px",
-                      "gutter": "16px",
-                      "stack-md": "16px"
-              },
-              "fontFamily": {
-                      "display-lg": ["Inter"],
-                      "body-md": ["Inter"],
-                      "headline-md": ["Inter"],
-                      "label-sm": ["Inter"],
-                      "headline-lg": ["Inter"],
-                      "label-md": ["Inter"],
-                      "display-lg-mobile": ["Inter"],
-                      "body-lg": ["Inter"]
-              },
-              "fontSize": {
-                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
-                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
-                      "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                      "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                      "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
-                      "display-lg-mobile": ["36px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
-                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}]
-              }
-            }
-          }
-        }
-    </script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f2e8d5">
+<title>TimeBill — Track Every Minute. Bill Every Hour.</title>
+<meta name="description" content="TimeBill is a minimalist time tracker for freelancers and professionals. Track work sessions, calculate billable earnings, and export professional reports.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TimeBill — Professional Time Tracking">
+<meta property="og:description" content="Track every minute. Bill every hour. Calculate earnings in real time and keep your work organised with TimeBill.">
+<meta property="og:url" content="https://timebill.indiacybercafe.com/">
+<meta property="og:image" content="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png">
+<link rel="icon" type="image/png" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png">
+<link rel="apple-touch-icon" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-        body {
-            background-color: #F5ECDD;
-            color: #2a1614;
-        }
-        .glass-header {
-            background: rgba(245, 236, 221, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .luxury-card {
-            background-color: #F8F4EF;
-            box-shadow: 0px 4px 20px rgba(74, 35, 31, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .luxury-card:active {
-            transform: scale(0.98);
-        }
-        .btn-primary {
-            background-color: #4A231F;
-            color: white;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        .btn-primary:active {
-            transform: scale(0.95);
-            opacity: 0.9;
-        }
-        .btn-secondary {
-            border: 1px solid #E4D8C8;
-            color: #4A231F;
-            background-color: transparent;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-        .btn-secondary:active {
-            transform: scale(0.95);
-            background-color: rgba(228, 216, 200, 0.3);
-        }
-        .gold-accent {
-            color: #D4AE7A;
-        }
-        .divider {
-            height: 1px;
-            background-color: #E4D8C8;
-            margin: 0 16px;
-        }
-        .badge-subtle {
-            background-color: rgba(107, 58, 51, 0.1);
-            color: #6B3A33;
-        }
-    </style>
+:root{--cream:#f2e8d5;--paper:#faf3e3;--tomato:#e04a2a;--pool:#2e7fa4;--ink:#1b1512;--sand:#d9c9a3;--line:rgba(27,21,18,.18);--shadow:8px 9px 0 rgba(27,21,18,.11);--soft:0 18px 48px rgba(57,39,19,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}a,button,summary{cursor:pointer}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1180px,calc(100% - 44px));margin:auto}.eyebrow{font:500 11px "DM Mono",monospace;letter-spacing:.15em;text-transform:uppercase}.section{padding:100px 0;position:relative}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:42px}.section-head h2{font:700 clamp(39px,5vw,65px)/.96 "Space Grotesk";letter-spacing:-.06em;margin:12px 0 0}.section-head p{max-width:360px;color:#675d50;line-height:1.7;font-size:14px;margin:0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 21px;border:1.5px solid var(--ink);border-radius:4px;font-size:13px;font-weight:800;transition:transform .25s,box-shadow .25s,background .25s,color .25s}.btn:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--ink)}.btn svg{width:17px;height:17px}.btn.primary{background:var(--tomato);color:white;border-color:var(--tomato)}.btn.dark{background:var(--ink);color:var(--paper)}.btn.paper{background:var(--paper)}.tag{display:inline-block;background:var(--paper);border:1px solid var(--ink);padding:8px 11px;font:11px "DM Mono";letter-spacing:.08em;text-transform:uppercase;transform:rotate(-2deg)}
+/* paper-cut navigation */
+.nav{position:sticky;top:0;z-index:30;background:rgba(242,232,213,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font:700 21px "Space Grotesk";letter-spacing:-.06em}.brand img{width:39px;height:39px;object-fit:cover;border:1px solid var(--ink);border-radius:50%;mix-blend-mode:multiply}.brand-mark{width:40px;height:40px;background:var(--tomato);color:white;display:grid;place-items:center;clip-path:polygon(7% 0,100% 8%,91% 100%,0 90%);font:700 17px "Space Grotesk";transform:rotate(-5deg)}.nav-links{display:flex;align-items:center;gap:27px;font-size:12px;font-weight:800}.nav-links a{opacity:.72;transition:opacity .2s,color .2s}.nav-links a:hover{opacity:1;color:var(--tomato)}.nav-right{display:flex;align-items:center;gap:12px}.nav-right .btn{padding:11px 15px}.menu-btn{display:none;border:1px solid var(--line);background:var(--paper);padding:9px;border-radius:4px}
+/* hero */
+.hero{padding:72px 0 85px;min-height:660px;display:flex;align-items:center;position:relative;isolation:isolate;overflow:hidden}.hero:before{content:"";position:absolute;z-index:-1;width:590px;height:590px;right:-140px;top:-20px;border-radius:50%;background:radial-gradient(circle,rgba(46,127,164,.22),transparent 69%)}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}.hero h1{font:700 clamp(58px,7.2vw,96px)/.87 "Space Grotesk";letter-spacing:-.08em;margin:23px 0 24px}.hero h1 em{font-style:normal;color:var(--tomato);position:relative;display:inline-block}.hero h1 em:after{content:"";position:absolute;height:9px;background:var(--pool);left:0;right:-7px;bottom:1px;z-index:-1;transform:rotate(-2deg)}.hero-copy>p{font-size:16px;line-height:1.8;color:#62584c;max-width:520px}.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}.hero-foot{display:flex;align-items:center;gap:12px;margin-top:28px;font:11px "DM Mono";color:#716657}.hero-foot:before{content:"";width:35px;height:1px;background:var(--tomato)}
+/* CSS dashboard collage */
+.hero-art{height:520px;position:relative;display:grid;place-items:center}.orb{position:absolute;width:390px;height:390px;border-radius:50%;background:linear-gradient(140deg,#e6c68f,#e98b63 65%,#df6c51);box-shadow:inset -18px -20px 45px rgba(125,49,21,.12);animation:float 7s ease-in-out infinite}.orb:after{content:"";position:absolute;inset:18px;border:1px dashed rgba(27,21,18,.4);border-radius:50%}.dashboard{position:relative;z-index:3;width:300px;min-height:390px;padding:20px;background:var(--paper);border:2px solid var(--ink);box-shadow:18px 22px 0 rgba(27,21,18,.18);transform:rotate(-5deg);clip-path:polygon(0 2%,98% 0,100% 98%,2% 100%)}.dash-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--sand);padding-bottom:13px}.dash-brand{font:700 19px "Space Grotesk";letter-spacing:-.06em}.dash-brand span{color:var(--tomato)}.live{font:9px "DM Mono";background:#dce9d7;color:#315d35;padding:6px 8px;border-radius:30px}.dash-label{font:10px "DM Mono";color:#746859;text-transform:uppercase;letter-spacing:.12em;margin-top:24px}.dash-time{font:700 49px/.98 "Space Grotesk";letter-spacing:-.07em;margin:8px 0}.dash-running{display:flex;align-items:center;gap:7px;font:10px "DM Mono";color:#537c4a}.pulse{width:7px;height:7px;background:#65a15a;border-radius:50%;box-shadow:0 0 0 5px #dce9d7}.dash-earn{margin-top:23px;background:#f0e3ce;padding:13px 15px;transform:rotate(1deg)}.dash-earn small{display:block;font:9px "DM Mono";text-transform:uppercase;color:#746859}.dash-earn strong{font:700 28px "Space Grotesk";letter-spacing:-.05em}.dash-bars{height:68px;display:flex;align-items:end;gap:8px;margin-top:22px;border-bottom:1px solid var(--sand);padding:0 8px}.dash-bars i{flex:1;background:var(--pool);border-radius:3px 3px 0 0;opacity:.8}.dash-bars i:nth-child(1){height:25%}.dash-bars i:nth-child(2){height:48%}.dash-bars i:nth-child(3){height:36%}.dash-bars i:nth-child(4){height:72%}.dash-bars i:nth-child(5){height:55%}.dash-bars i:nth-child(6){height:88%;background:var(--tomato)}.dash-bottom{display:flex;justify-content:space-between;margin-top:15px;font:9px "DM Mono";color:#746859}.float-note{position:absolute;z-index:4;background:var(--paper);border:1px solid var(--ink);padding:13px 16px;box-shadow:var(--shadow)}.float-note strong{display:block;font:700 16px "Space Grotesk"}.float-note small{font:10px "DM Mono";color:#6d6254}.note-a{left:0;top:78px;transform:rotate(-8deg)}.note-b{right:-3px;bottom:70px;background:var(--pool);color:white;transform:rotate(5deg)}.note-b small{color:#e2f2f6}.burst{position:absolute;right:28px;top:27px;width:90px;height:90px;background:var(--tomato);color:white;display:grid;place-items:center;text-align:center;clip-path:polygon(50% 0,61% 17%,80% 6%,82% 28%,100% 35%,86% 51%,100% 68%,78% 75%,78% 97%,57% 85%,43% 100%,34% 79%,10% 83%,17% 60%,0 47%,19% 33%,13% 12%,37% 19%);font:700 12px/1.1 "Space Grotesk";transform:rotate(10deg);z-index:5}
+/* ticker */
+.ticker{background:var(--ink);color:var(--paper);padding:15px 0;overflow:hidden;transform:rotate(-1deg) scale(1.02);border-block:2px solid var(--tomato)}.ticker-track{display:flex;gap:34px;white-space:nowrap;width:max-content;animation:marquee 30s linear infinite;font:12px "DM Mono";letter-spacing:.13em}.ticker b{color:#f28a70;font-weight:400}
+/* feature cards */
+.features{background:var(--paper)}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.feature{min-height:270px;padding:27px;border:1.5px solid var(--ink);background:var(--cream);box-shadow:var(--shadow);position:relative;transition:transform .25s,box-shadow .25s}.feature:nth-child(2){background:#e1edf0;transform:rotate(1deg)}.feature:nth-child(3){background:#f2d9ce;transform:rotate(-1deg)}.feature:hover{transform:translateY(-8px) rotate(0);box-shadow:13px 15px 0 rgba(27,21,18,.12)}.feature-icon{width:53px;height:53px;display:grid;place-items:center;background:var(--tomato);color:white;clip-path:polygon(8% 0,100% 8%,92% 100%,0 88%);margin-bottom:30px}.feature:nth-child(2) .feature-icon{background:var(--pool)}.feature-icon svg{width:26px;height:26px}.feature h3{font:700 23px "Space Grotesk";letter-spacing:-.04em;margin:0 0 10px}.feature p{font-size:13px;line-height:1.75;color:#665b4f;margin:0}.index{position:absolute;right:20px;top:18px;font:11px "DM Mono";color:#8b7d6c}
+/* bento */
+.bento{display:grid;grid-template-columns:1.6fr .8fr;gap:18px}.bento-card{padding:28px;border:1.5px solid var(--ink);background:var(--paper);box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:260px}.bento-card.wide{background:#e4edf0}.bento-card h3{font:700 25px "Space Grotesk";margin:0 0 8px}.bento-card p{font-size:13px;color:#655a4d;line-height:1.7;max-width:380px;margin:0}.money{font:700 clamp(40px,6vw,65px) "Space Grotesk";letter-spacing:-.07em;margin-top:45px}.money small{font-size:17px;color:#746859}.progress{height:8px;background:#d5c8b4;margin-top:12px;max-width:430px;border-radius:20px;overflow:hidden}.progress span{display:block;width:76%;height:100%;background:linear-gradient(90deg,var(--pool),var(--tomato));border-radius:20px}.score{display:grid;place-items:center;text-align:center;background:#f1d9cc}.ring{width:115px;height:115px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--tomato) 0 85%,#ddcbb0 85%);position:relative;margin:18px auto}.ring:before{content:"";position:absolute;inset:9px;background:var(--paper);border-radius:50%}.ring strong{position:relative;font:700 25px "Space Grotesk";transform:rotate(-2deg)}.bento-card.report{grid-column:1/-1;min-height:150px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--ink);color:var(--paper)}.bento-card.report p{color:#c7b8a7}.report-stamp{width:100px;height:100px;flex:0 0 100px;display:grid;place-items:center;border:1px dashed var(--paper);border-radius:50%;color:var(--tomato);font:700 12px "DM Mono";transform:rotate(9deg)}
+/* workflow */
+.workflow{background:#e9ddc5}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.step{padding:23px 20px;border-top:2px solid var(--ink);position:relative}.step-num{font:700 46px "Space Grotesk";color:var(--tomato);letter-spacing:-.08em}.step h3{font:700 19px "Space Grotesk";margin:13px 0 8px}.step p{font-size:12px;line-height:1.75;color:#675c50;margin:0}.step:not(:last-child):after{content:"";position:absolute;right:0;top:39px;width:25px;border-top:1px dashed var(--tomato)}
+/* testimonial-like scenarios */
+.stories{background:var(--paper)}.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.story{padding:25px;background:var(--cream);border:1px solid var(--line);min-height:220px;box-shadow:5px 6px 0 rgba(27,21,18,.07)}.story:nth-child(2){transform:translateY(12px) rotate(1deg);background:#e1edf0}.story:nth-child(3){transform:rotate(-1deg);background:#f3d9ce}.story-mark{font:700 42px "Space Grotesk";color:var(--tomato)}.story h3{font:700 19px "Space Grotesk";margin:13px 0 8px}.story p{font-size:13px;line-height:1.7;color:#675c50;margin:0}.small-note{font:10px "DM Mono";color:#7b6f60;margin-top:30px}
+/* plans */
+.plans{background:var(--cream)}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}.plan{padding:27px;border:1.5px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;position:relative;box-shadow:5px 6px 0 rgba(27,21,18,.08)}.plan.featured{background:var(--ink);color:var(--paper);transform:translateY(-11px);box-shadow:10px 12px 0 rgba(224,74,42,.28)}.plan-label{font:11px "DM Mono";letter-spacing:.13em;text-transform:uppercase}.plan h3{font:700 27px "Space Grotesk";margin:17px 0 5px}.plan-price{font:700 33px "Space Grotesk";letter-spacing:-.06em;margin:10px 0}.plan-price small{font:11px "DM Mono";letter-spacing:0}.plan>p{font-size:13px;line-height:1.7;color:#6a5f53;min-height:65px}.plan.featured>p{color:#c5b9a9}.plan ul{list-style:none;padding:0;margin:16px 0 27px;display:grid;gap:12px;font-size:12px}.plan li{display:flex;gap:9px;align-items:flex-start}.plan li:before{content:"+";color:var(--tomato);font-weight:800}.plan .btn{margin-top:auto}.plan.featured .btn{background:var(--tomato);border-color:var(--tomato);color:white}.popular{position:absolute;right:15px;top:-13px;background:var(--tomato);color:white;padding:7px 10px;font:10px "DM Mono";text-transform:uppercase;transform:rotate(3deg)}
+/* FAQ */
+.faq-list{max-width:820px;margin:auto;display:grid;gap:12px}.faq-item{background:var(--paper);border:1px solid var(--line);box-shadow:4px 5px 0 rgba(27,21,18,.06)}.faq-item summary{padding:19px 21px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:15px;font:700 16px "Space Grotesk"}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary:after{content:"+";font:24px "DM Sans";color:var(--tomato)}.faq-item[open] summary:after{content:"−"}.faq-answer{padding:0 21px 20px;color:#655a4d;font-size:13px;line-height:1.75}
+/* CTA and footer */
+.final-cta{padding:94px 0;background:var(--tomato);color:white;position:relative;overflow:hidden}.final-cta:after{content:"TIME";position:absolute;right:-20px;bottom:-100px;font:700 250px/.9 "Space Grotesk";letter-spacing:-.1em;color:rgba(255,255,255,.09)}.cta-inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:35px}.cta-inner h2{font:700 clamp(43px,6vw,75px)/.93 "Space Grotesk";letter-spacing:-.07em;margin:13px 0;max-width:690px}.cta-inner p{color:#ffe4dc;line-height:1.7;max-width:500px}.cta-inner .btn{background:var(--paper);border-color:var(--paper);white-space:nowrap}
+footer{background:var(--ink);color:var(--paper);padding:68px 0 24px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;padding-bottom:50px}.footer-brand p{max-width:300px;color:#b8aa99;font-size:13px;line-height:1.8}.footer-col h4{font:11px "DM Mono";letter-spacing:.13em;text-transform:uppercase;color:#e58a70;margin:4px 0 18px}.footer-col a{display:block;color:#d0c5b8;font-size:12px;margin:12px 0;transition:color .2s}.footer-col a:hover{color:white}.socials{display:flex;gap:9px;margin-top:19px}.socials a{width:34px;height:34px;border:1px solid #6a5d50;border-radius:50%;display:grid;place-items:center;transition:background .2s,border .2s}.socials a:hover{background:var(--tomato);border-color:var(--tomato)}.socials svg{width:15px;height:15px}.footer-bottom{border-top:1px solid #51463d;padding-top:22px;display:flex;justify-content:space-between;gap:20px;color:#9d9081;font:10px "DM Mono"}.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}@keyframes marquee{to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+@media(max-width:900px){.nav-links{gap:14px}.hero-grid{gap:5px}.hero h1{font-size:clamp(55px,8vw,78px)}.hero-art{transform:scale(.88)}.feature-grid,.story-grid,.plan-grid{gap:13px}.feature{padding:22px 19px}.footer-grid{grid-template-columns:1.4fr 1fr 1fr}.footer-col:last-child{grid-column:2}}
+@media(max-width:680px){.wrap{width:min(100% - 32px,520px)}.section{padding:75px 0}.nav-inner{height:68px}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;padding:14px 22px 20px;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:13px 0;border-bottom:1px solid var(--line)}.nav-right>.btn{display:none}.menu-btn{display:grid;place-items:center}.hero{padding:53px 0 62px;min-height:0}.hero-grid{grid-template-columns:1fr}.hero h1{font-size:clamp(59px,16vw,83px)}.hero-copy>p{font-size:14px}.hero-art{height:440px;margin-top:0;margin-bottom:-30px;transform:scale(.86);transform-origin:top center}.orb{width:350px;height:350px}.dashboard{transform:rotate(-5deg) scale(.91)}.note-a{left:-5px;top:65px}.note-b{right:-5px;bottom:65px}.burst{right:0;top:15px}.section-head{display:block;margin-bottom:30px}.section-head p{margin-top:16px}.feature-grid,.story-grid,.plan-grid{grid-template-columns:1fr;gap:17px}.feature,.feature:nth-child(2),.feature:nth-child(3),.story:nth-child(2),.story:nth-child(3){transform:none}.feature{min-height:225px}.bento{grid-template-columns:1fr}.bento-card.report{grid-column:auto}.steps{grid-template-columns:1fr 1fr;gap:20px 10px}.step{padding:17px 13px}.step:not(:last-child):after{display:none}.plan.featured{transform:none;margin:7px 0}.plan>p{min-height:0}.cta-inner{display:block}.cta-inner h2{font-size:53px}.cta-inner .btn{margin-top:14px}.footer-grid{grid-template-columns:1fr 1fr;gap:28px 18px}.footer-brand{grid-column:1/-1}.footer-col:last-child{grid-column:auto}.footer-bottom{flex-direction:column;align-items:flex-start}.ticker{padding:12px 0}}
+</style>
 </head>
-<body class="antialiased font-body-md text-body-md min-h-screen flex flex-col">
-<!-- Header -->
-<header class="fixed top-0 left-0 right-0 w-full z-50 glass-header px-container-margin py-stack-md flex justify-between items-center md:hidden">
-<div class="flex items-center gap-2">
-<img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill icon" class="w-8 h-8 object-cover rounded-full" />
-<span class="font-headline-md text-headline-md text-primary tracking-tight">TimeBill</span>
-</div>
-<a class="btn-primary font-label-md text-label-md px-4 py-2 rounded-full" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" data-get-started target="_blank" rel="noopener noreferrer">Get Started</a>
+<body>
+<header class="nav">
+ <div class="wrap nav-inner">
+  <a class="brand" href="https://timebill.indiacybercafe.com/" aria-label="TimeBill home"><img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill app icon"><span>TimeBill</span></a>
+  <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+   <a href="#features">Features</a><a href="#workflow">Workflow</a><a href="#plans">Plans</a><a href="#faq">FAQ</a><a href="https://timebill.indiacybercafe.com/contact-support.html">Contact</a>
+  </nav>
+  <div class="nav-right"><a class="btn dark" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" target="_blank" rel="noopener noreferrer">Get TimeBill <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+   <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+ </div>
 </header>
-<!-- TopNavBar (Web) -->
-<nav class="hidden md:flex justify-between items-center left-0 right-0 w-full px-container-margin py-stack-md fixed top-0 z-50 bg-surface/40 backdrop-blur-md border-b border-outline-variant/20 shadow-sm">
-<div class="flex items-center gap-3 text-headline-md font-headline-lg tracking-tight text-primary">
-<img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill icon" class="w-8 h-8 object-cover rounded-full" />
-<span>TimeBill</span>
-</div>
-<div class="flex gap-stack-lg">
-<a class="text-primary font-semibold border-b-2 border-secondary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="index.html">Home</a>
-<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="help-faq.html">FAQ</a>
-<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-primary-container/10 transition-colors duration-300 px-2 py-1" href="contact-support.html">Contact</a>
-</div>
-<a class="btn-primary font-label-md text-label-md px-6 py-2 rounded-full active:scale-95 transition-transform duration-200" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" data-get-started target="_blank" rel="noopener noreferrer">Get Started</a>
-</nav>
-<main class="flex-grow pt-[88px] md:pt-[104px]">
-<!-- Hero Section -->
-<section class="px-container-margin py-section-gap flex flex-col items-center text-center max-w-3xl mx-auto">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-subtle font-label-sm text-label-sm mb-stack-lg">
-<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
-                Professional Time Tracking
-            </div>
-<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary mb-stack-md">
-                Track Every Minute.<br/>Bill Every Hour.
-            </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl">
-                The minimalist time tracker designed for high-value professionals. Calculate earnings in real-time, generate stunning reports, and never lose a billable minute again.
-            </p>
-<div class="flex flex-col sm:flex-row gap-stack-sm w-full sm:w-auto">
-<a class="btn-primary font-label-md text-label-md px-8 py-4 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" target="_blank" rel="noopener noreferrer">
-<span class="material-symbols-outlined" data-icon="play_arrow" data-weight="fill">play_arrow</span>
-                    Download on Google Play
-                </a>
-</div>
-<div class="mt-section-gap w-full relative">
-<!-- 3D Phone Mockup Placeholder -->
-<div class="relative w-full max-w-sm mx-auto aspect-[1/2] rounded-[2rem] overflow-hidden shadow-2xl luxury-card">
-<img alt="TimeBill App 3D Mockup" class="absolute inset-0 w-full h-full object-cover" src="https://indiacybercafe.com/wp-content/uploads/2026/07/logo.png"/>
-</div>
-<!-- Decorative Elements -->
-<div class="absolute top-1/4 -left-4 w-24 h-24 bg-surface rounded-2xl shadow-xl luxury-card flex flex-col items-center justify-center hidden md:flex">
-<span class="material-symbols-outlined text-primary text-3xl mb-1" data-icon="timer">timer</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Active</span>
-</div>
-<div class="absolute bottom-1/3 -right-4 w-32 h-16 bg-surface rounded-xl shadow-xl luxury-card flex items-center justify-center hidden md:flex">
-<span class="font-headline-md text-headline-md text-primary">₹15.4k</span>
-</div>
-</div>
-</section>
-<!-- Trust Bar -->
-<section class="py-stack-lg border-y border-outline-variant/30 bg-surface-container-lowest/50">
-<div class="max-w-7xl mx-auto px-container-margin text-center">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-stack-md">Trusted by Freelancers, Developers, and Agencies</p>
-<div class="flex flex-wrap justify-center gap-8 opacity-60 grayscale">
-<!-- Client Logos placeholders (using icons for now) -->
-<span class="material-symbols-outlined text-4xl" data-icon="corporate_fare">corporate_fare</span>
-<span class="material-symbols-outlined text-4xl" data-icon="business">business</span>
-<span class="material-symbols-outlined text-4xl" data-icon="apartment">apartment</span>
-<span class="material-symbols-outlined text-4xl" data-icon="domain">domain</span>
-</div>
-</div>
-</section>
-<!-- Features (Vertical Stack) -->
-<section class="px-container-margin py-section-gap max-w-md mx-auto md:max-w-7xl">
-<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-section-gap">Precision Engineering for Your Workflow</h2>
-<div class="flex flex-col gap-stack-lg">
-<!-- Feature 1 -->
-<div class="luxury-card rounded-2xl p-container-margin flex flex-col md:flex-row md:items-center gap-container-margin">
-<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container shrink-0">
-<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Start/Stop Timer</h3>
-<p class="text-on-surface-variant">One-tap precision tracking. Focus on your work, while we seamlessly record every billable second in the background.</p>
-</div>
-</div>
-<!-- Feature 2 -->
-<div class="luxury-card rounded-2xl p-container-margin flex flex-col md:flex-row md:items-center gap-container-margin">
-<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined" data-icon="payments">payments</span>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Hourly Billing</h3>
-<p class="text-on-surface-variant">Set custom rates per project or client. Watch your earnings calculate in real-time as the timer runs.</p>
-</div>
-</div>
-<!-- Feature 3 -->
-<div class="luxury-card rounded-2xl p-container-margin flex flex-col md:flex-row md:items-center gap-container-margin">
-<div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary-container shrink-0">
-<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Daily Analytics</h3>
-<p class="text-on-surface-variant">Visualize your productivity with elegant charts. Understand where your time goes and optimize your output.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Why TimeBill (Bento Grid) -->
-<section class="px-container-margin py-section-gap max-w-7xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-lg">Why Choose TimeBill</h2>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-stack-md">
-<!-- Bento Item 1: Live Earnings (Spans 8 cols on desktop) -->
-<div class="md:col-span-8 luxury-card rounded-3xl p-container-margin relative overflow-hidden min-h-[300px] flex flex-col justify-end">
-<div class="absolute top-container-margin left-container-margin">
-<h3 class="font-headline-md text-headline-md text-primary">Live Earnings</h3>
-<p class="text-on-surface-variant text-sm mt-1 max-w-xs">See your value accumulate second by second. Motivation built right into the timer.</p>
-</div>
-<div class="mt-auto">
-<div class="text-display-lg-mobile font-display-lg-mobile text-primary-container tracking-tight">
-                             ₹24,500<span class="text-headline-md text-on-surface-variant">.00</span>
-</div>
-<div class="w-full h-2 bg-outline-variant/30 rounded-full mt-2 overflow-hidden">
-<div class="h-full bg-gradient-to-r from-secondary to-primary-container w-3/4 rounded-full"></div>
-</div>
-</div>
-</div>
-<!-- Bento Item 2: Productivity (Spans 4 cols on desktop) -->
-<div class="md:col-span-4 luxury-card rounded-3xl p-container-margin flex flex-col items-center justify-center text-center min-h-[300px]">
-<div class="w-16 h-16 rounded-full border-4 border-secondary/20 flex items-center justify-center mb-stack-md relative">
-<svg class="absolute inset-0 w-full h-full text-secondary" viewbox="0 0 36 36">
-<path class="text-outline-variant/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
-<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="85, 100" stroke-width="3"></path>
-</svg>
-<span class="font-headline-md text-headline-md text-primary">85%</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-1">Productivity</h3>
-<p class="text-on-surface-variant text-sm">Focus score for this week.</p>
-</div>
-<!-- Bento Item 3: Professional Reports (Spans full width) -->
-<div class="md:col-span-12 luxury-card rounded-3xl p-container-margin flex flex-col md:flex-row items-center gap-container-margin">
-<div class="flex-1">
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Professional Reports</h3>
-<p class="text-on-surface-variant">Export detailed, pixel-perfect PDF and CSV reports ready to be sent directly to your clients. Luxury branding included.</p>
-</div>
-<div class="w-full md:w-1/3 h-32 bg-surface-container rounded-xl flex items-center justify-center border border-outline-variant/50">
-<span class="material-symbols-outlined text-4xl text-primary/40" data-icon="description">description</span>
-</div>
-</div>
-</div>
-</section>
-<!-- How it Works (Vertical Timeline) -->
-<section class="px-container-margin py-section-gap bg-surface-container-low max-w-md mx-auto md:max-w-full">
-<div class="max-w-3xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-stack-lg">The Workflow</h2>
-<div class="relative pl-8 md:pl-0 border-l md:border-l-0 border-outline-variant/30 space-y-12">
-<!-- Step 1 -->
-<div class="relative md:flex md:items-center md:justify-between group">
-<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
-<div class="w-3 h-3 bg-secondary rounded-full group-hover:scale-125 transition-transform"></div>
-</div>
-<div class="md:w-5/12 md:text-right pr-stack-md">
-<h3 class="font-headline-md text-headline-md text-primary mb-1">1. Set Rate</h3>
-<p class="text-on-surface-variant text-sm">Define your hourly rate per project.</p>
-</div>
-<div class="hidden md:block md:w-5/12"></div>
-<div class="hidden md:block absolute left-1/2 top-0 bottom-[-48px] border-l border-outline-variant/30"></div>
-</div>
-<!-- Step 2 -->
-<div class="relative md:flex md:items-center md:justify-between md:flex-row-reverse group">
-<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
-<div class="w-3 h-3 bg-secondary rounded-full group-hover:scale-125 transition-transform"></div>
-</div>
-<div class="md:w-5/12 pl-stack-md">
-<h3 class="font-headline-md text-headline-md text-primary mb-1">2. Start Timer</h3>
-<p class="text-on-surface-variant text-sm">One tap to begin recording time.</p>
-</div>
-<div class="hidden md:block md:w-5/12"></div>
-<div class="hidden md:block absolute left-1/2 top-0 bottom-[-48px] border-l border-outline-variant/30"></div>
-</div>
-<!-- Step 3 -->
-<div class="relative md:flex md:items-center md:justify-between group">
-<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
-<div class="w-3 h-3 bg-secondary rounded-full group-hover:scale-125 transition-transform"></div>
-</div>
-<div class="md:w-5/12 md:text-right pr-stack-md">
-<h3 class="font-headline-md text-headline-md text-primary mb-1">3. Stop Session</h3>
-<p class="text-on-surface-variant text-sm">Complete your work block.</p>
-</div>
-<div class="hidden md:block md:w-5/12"></div>
-<div class="hidden md:block absolute left-1/2 top-0 bottom-[-48px] border-l border-outline-variant/30"></div>
-</div>
-<!-- Step 4 -->
-<div class="relative md:flex md:items-center md:justify-between md:flex-row-reverse group">
-<div class="absolute -left-[41px] md:left-1/2 md:-ml-4 w-8 h-8 rounded-full bg-surface border-2 border-secondary flex items-center justify-center z-10">
-<span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span>
-</div>
-<div class="md:w-5/12 pl-stack-md">
-<h3 class="font-headline-md text-headline-md text-primary mb-1">4. Automatic Earnings</h3>
-<p class="text-on-surface-variant text-sm">Review calculated earnings instantly.</p>
-</div>
-<div class="hidden md:block md:w-5/12"></div>
-</div>
-</div>
-</div>
-</section>
-<!-- Statistics -->
-<section class="px-container-margin py-section-gap max-w-7xl mx-auto text-center">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
-<div class="luxury-card rounded-2xl p-stack-lg">
-<div class="font-display-lg text-display-lg text-primary mb-2">100K+</div>
-<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wide">Hours Tracked</div>
-</div>
-<div class="luxury-card rounded-2xl p-stack-lg">
-<div class="font-display-lg text-display-lg text-primary mb-2">₹ Millions</div>
-<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wide">Calculated</div>
-</div>
-</div>
-</section>
-<!-- FAQ -->
-<section class="px-container-margin py-section-gap max-w-3xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-stack-lg">Frequently Asked Questions</h2>
-<div class="space-y-4">
-<details class="group luxury-card rounded-xl overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
-<summary class="flex items-center justify-between p-stack-md cursor-pointer list-none font-headline-md text-headline-md text-primary text-lg">
-<span>Is there a free tier?</span>
-<span class="transition group-open:rotate-180">
-<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
-</span>
-</summary>
-<div class="p-stack-md pt-0 text-on-surface-variant border-t border-outline-variant/20 mt-2">
-                        Yes, TimeBill offers a generous free tier perfect for solo freelancers managing up to 3 active projects.
-                    </div>
-</details>
-<details class="group luxury-card rounded-xl overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
-<summary class="flex items-center justify-between p-stack-md cursor-pointer list-none font-headline-md text-headline-md text-primary text-lg">
-<span>Can I export my data?</span>
-<span class="transition group-open:rotate-180">
-<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
-</span>
-</summary>
-<div class="p-stack-md pt-0 text-on-surface-variant border-t border-outline-variant/20 mt-2">
-                        Absolutely. You can export all timesheets and reports to CSV or beautiful PDF formats anytime.
-                    </div>
-</details>
-<details class="group luxury-card rounded-xl overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
-<summary class="flex items-center justify-between p-stack-md cursor-pointer list-none font-headline-md text-headline-md text-primary text-lg">
-<span>Does it work offline?</span>
-<span class="transition group-open:rotate-180">
-<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
-</span>
-</summary>
-<div class="p-stack-md pt-0 text-on-surface-variant border-t border-outline-variant/20 mt-2">
-                        Yes, your timer will continue to run and save data locally. It will sync automatically once you reconnect.
-                    </div>
-</details>
-</div>
-</section>
+<main>
+ <section class="hero"><div class="wrap hero-grid">
+  <div class="hero-copy">
+   <span class="tag">A little more value in every hour</span>
+   <div class="eyebrow" style="margin-top:25px">Professional time tracking · Freelancers · Teams</div>
+   <h1>Track every<br>minute. <em>Bill</em><br>every hour.</h1>
+   <p>Make your working hours count. TimeBill helps you track sessions, calculate billable earnings in real time and turn your work history into clear, professional reports.</p>
+   <div class="hero-actions"><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" target="_blank" rel="noopener noreferrer">Download on Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn paper" href="#features">Explore features</a></div>
+   <div class="hero-foot">Spend less time guessing. Know what your time is worth.</div>
+  </div>
+  <div class="hero-art" aria-label="Decorative TimeBill time tracking dashboard illustration">
+   <div class="orb"></div><div class="burst">MAKE<br>TIME<br>COUNT</div>
+   <div class="float-note note-a"><strong>Every second.</strong><small>Captured while you work.</small></div>
+   <div class="dashboard"><div class="dash-top"><div class="dash-brand">Time<span>Bill</span></div><div class="live">● SESSION LIVE</div></div><div class="dash-label">Today's tracked time</div><div class="dash-time">04:28:36</div><div class="dash-running"><i class="pulse"></i> Timer running · Project Alpha</div><div class="dash-earn"><small>Estimated earnings</small><strong>₹2,240.00</strong></div><div class="dash-label">Weekly activity</div><div class="dash-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dash-bottom"><span>MON — SAT</span><span>TIME OVERVIEW ↗</span></div></div>
+   <div class="float-note note-b"><strong>Bill with clarity.</strong><small>Reports ready when you are.</small></div>
+  </div>
+ </div></section>
+ <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>TRACK YOUR TIME <b>✳</b></span><span>CALCULATE EARNINGS <b>✳</b></span><span>PROJECT RATES <b>✳</b></span><span>PDF & CSV REPORTS <b>✳</b></span><span>WORK WITH CLARITY <b>✳</b></span><span>MAKE EVERY HOUR COUNT <b>✳</b></span><span>TRACK YOUR TIME <b>✳</b></span><span>CALCULATE EARNINGS <b>✳</b></span><span>PROJECT RATES <b>✳</b></span><span>PDF & CSV REPORTS <b>✳</b></span><span>WORK WITH CLARITY <b>✳</b></span><span>MAKE EVERY HOUR COUNT <b>✳</b></span></div></div>
+
+ <section class="section features" id="features"><div class="wrap">
+  <div class="section-head reveal"><div><div class="eyebrow">01 / The essentials</div><h2>Precision for your<br>everyday workflow.</h2></div><p>Keep your time records organised with simple tools designed around the way independent professionals and project-based workers work.</p></div>
+  <div class="feature-grid">
+   <article class="feature reveal"><span class="index">01</span><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2M8 2h8"/></svg></div><h3>Start / Stop Timer</h3><p>Start a work session with a tap. Track elapsed time while you focus on the task, then stop and save the session when you are done.</p></article>
+   <article class="feature reveal"><span class="index">02</span><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M7 10h4M7 14h7M16 10h1"/></svg></div><h3>Hourly Billing</h3><p>Set an hourly rate for your work and see estimated earnings calculated from your tracked time.</p></article>
+   <article class="feature reveal"><span class="index">03</span><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-5 3 2 5-7"/></svg></div><h3>Daily Analytics</h3><p>Review time and earnings summaries to understand how your working hours are distributed across your activities.</p></article>
+  </div>
+ </div></section>
+
+ <section class="section"><div class="wrap">
+  <div class="section-head reveal"><div><div class="eyebrow">02 / A clearer picture</div><h2>See the value<br>behind your hours.</h2></div><p>Turn a running timer into useful information: time logged, earnings estimated and reports you can share.</p></div>
+  <div class="bento">
+   <article class="bento-card wide reveal"><div class="eyebrow">Live earnings / illustrative interface</div><h3>Watch your work add up.</h3><p>With an hourly rate set, TimeBill calculates an earnings estimate as your tracked time grows.</p><div class="money">₹2,450<small>.00</small></div><div class="progress"><span></span></div></article>
+   <article class="bento-card score reveal"><div class="eyebrow">Time insights</div><div class="ring"><strong>85%</strong></div><h3>Know your rhythm.</h3><p>Review your activity and focus patterns.</p></article>
+   <article class="bento-card report reveal"><div><div class="eyebrow">Export / share / organise</div><h3>Professional reports.</h3><p>Export timesheet and work summaries to PDF or CSV for your records and client conversations.</p></div><div class="report-stamp">PDF<br>+ CSV<br>READY</div></article>
+  </div>
+ </div></section>
+
+ <section class="section workflow" id="workflow"><div class="wrap">
+  <div class="section-head reveal"><div><div class="eyebrow">03 / Four simple steps</div><h2>From first tap<br>to final figure.</h2></div><p>A straightforward routine to record your work and understand the value of the time you put in.</p></div>
+  <div class="steps">
+   <article class="step reveal"><div class="step-num">01</div><h3>Set your rate</h3><p>Enter the hourly rate you want to use for a project or work session.</p></article>
+   <article class="step reveal"><div class="step-num">02</div><h3>Start the timer</h3><p>Begin tracking with one tap and get on with your work.</p></article>
+   <article class="step reveal"><div class="step-num">03</div><h3>Stop and save</h3><p>Finish the session and keep a record of the time you worked.</p></article>
+   <article class="step reveal"><div class="step-num">04</div><h3>Review earnings</h3><p>Check the calculated amount and export your records when needed.</p></article>
+  </div>
+ </div></section>
+
+ <section class="section stories"><div class="wrap">
+  <div class="section-head reveal"><div><div class="eyebrow">04 / Made for focused work</div><h2>One timer.<br>Many kinds of work.</h2></div><p>Whether your day is client calls, creative work or project delivery, keep your time records in one place.</p></div>
+  <div class="story-grid">
+   <article class="story reveal"><div class="story-mark">A.</div><h3>Freelancers</h3><p>Track client work sessions, calculate billable time and prepare a clear record before sending an invoice.</p></article>
+   <article class="story reveal"><div class="story-mark">B.</div><h3>Developers & creators</h3><p>Keep a record of focused project blocks and understand how much time different tasks take.</p></article>
+   <article class="story reveal"><div class="story-mark">C.</div><h3>Consultants & agencies</h3><p>Organise work sessions and export time summaries to support project reviews and client reporting.</p></article>
+  </div>
+  <div class="small-note">Typical use cases, not customer testimonials or endorsements.</div>
+ </div></section>
+
+ <section class="section plans" id="plans"><div class="wrap">
+  <div class="section-head reveal"><div><div class="eyebrow">05 / Start at your pace</div><h2>Make time work<br>for your workflow.</h2></div><p>Choose the way you want to get started. Check the app for the latest feature availability and any applicable plan details.</p></div>
+  <div class="plan-grid">
+   <article class="plan reveal"><div class="plan-label">01 / Start simple</div><h3>Free Starter</h3><div class="plan-price">Free <small>available tier</small></div><p>For solo professionals getting their time records in order.</p><ul><li>Time tracking essentials</li><li>Up to 3 active projects</li><li>Hourly rate and earnings calculation</li><li>Great for getting started</li></ul><a class="btn paper" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" target="_blank" rel="noopener noreferrer">Get started <span>→</span></a></article>
+   <article class="plan featured reveal"><span class="popular">Explore the app</span><div class="plan-label">02 / Work with clarity</div><h3>TimeBill Plus</h3><div class="plan-price">In app <small>check current options</small></div><p>For professionals who want a more complete view of their working time.</p><ul><li>Time and earnings overview</li><li>Project-based work records</li><li>PDF and CSV export options</li><li>Review your activity history</li></ul><a class="btn" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" target="_blank" rel="noopener noreferrer">Explore TimeBill <span>→</span></a></article>
+   <article class="plan reveal"><div class="plan-label">03 / Need a hand?</div><h3>Support</h3><div class="plan-price">Here to help</div><p>For app questions, account assistance or reporting an issue.</p><ul><li>Help and frequently asked questions</li><li>Contact the support team</li><li>Report an app issue</li><li>Policy and account guidance</li></ul><a class="btn paper" href="https://timebill.indiacybercafe.com/contact-support.html">Contact support <span>→</span></a></article>
+  </div>
+ </div></section>
+
+ <section class="section" id="faq"><div class="wrap">
+  <div class="section-head reveal"><div><div class="eyebrow">06 / Good to know</div><h2>Questions, answered.</h2></div><p>A few quick details to help you get started with TimeBill.</p></div>
+  <div class="faq-list">
+   <details class="faq-item reveal"><summary>Is there a free tier?</summary><div class="faq-answer">Yes. The provided TimeBill information describes a free tier for solo users managing up to three active projects. Check the app for the current plan details.</div></details>
+   <details class="faq-item reveal"><summary>Can I export my data?</summary><div class="faq-answer">TimeBill's supplied feature information includes PDF and CSV export options for timesheets and reports. Availability may depend on your app version or plan.</div></details>
+   <details class="faq-item reveal"><summary>Does the timer work offline?</summary><div class="faq-answer">The supplied app information says sessions can continue and save locally while offline, with syncing when connectivity returns. Check the latest app version for current behaviour.</div></details>
+   <details class="faq-item reveal"><summary>How are earnings calculated?</summary><div class="faq-answer">Set an hourly rate and track a work session. TimeBill uses the recorded duration and rate to calculate an earnings estimate.</div></details>
+  </div>
+ </div></section>
+
+ <section class="final-cta"><div class="wrap cta-inner"><div><div class="eyebrow">Your next productive hour starts here</div><h2>Make every<br>minute count.</h2><p>Download TimeBill and bring more clarity to the hours you work and the value you create.</p></div><a class="btn" href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch" target="_blank" rel="noopener noreferrer">Get TimeBill on Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>
 </main>
-<!-- Footer -->
-<footer class="bg-surface-container-lowest dark:bg-surface-dim w-full rounded-t-xl border-t border-outline-variant/30 text-on-surface dark:text-on-surface mt-auto">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg max-w-7xl mx-auto px-container-margin py-section-gap font-body-md text-body-md">
-<!-- Brand Column -->
-<div class="md:col-span-1 flex flex-col gap-stack-sm">
-<div class="text-headline-md font-headline-md text-primary dark:text-primary-fixed-dim flex items-center gap-2">
-<img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill icon" class="w-8 h-8 object-cover rounded-full" />
-                    TimeBill
-                </div>
-<p class="text-on-surface-variant font-label-sm text-label-sm mt-4">
-                    © 2026 TimeBill. All rights reserved.
-                </p>
-</div>
-<!-- Links Columns -->
-<div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-stack-md">
-<div class="flex flex-col gap-stack-sm">
-<h4 class="font-label-md text-label-md text-primary font-semibold mb-2">Resources</h4>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="help-faq.html">Help & FAQ</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="contact-support.html">Contact Support</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="report-issue.html">Report Issue</a>
-</div>
-<div class="flex flex-col gap-stack-sm">
-<h4 class="font-label-md text-label-md text-primary font-semibold mb-2">Policies</h4>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="privacy-policy.html">Privacy Policy</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="terms-and-conditions.html">Terms & Conditions</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="disclaimer.html">Disclaimer</a>
-</div>
-<div class="flex flex-col gap-stack-sm col-span-2 sm:col-span-1">
-<h4 class="font-label-md text-label-md text-primary font-semibold mb-2">Contact</h4>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="mailto:support@timebill.indiacybercafe.com">support@timebill.indiacybercafe.com</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all font-label-sm text-label-sm" href="tel:+919203251821">+91 9203251821</a>
-</div>
-</div>
-</div>
-</footer>
-<script src="get-started.js" defer></script>
-</body></html>
+<footer><div class="wrap">
+ <div class="footer-grid">
+  <div class="footer-brand"><a class="brand" href="https://timebill.indiacybercafe.com/"><img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt="TimeBill app icon"><span>TimeBill</span></a><p>A focused time tracker for freelancers and professionals. Record your work, calculate billable earnings and keep useful reports close at hand.</p>
+   <div class="socials">
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg></a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.1a3 3 0 0 0-2.1-2.1C19 4.5 12 4.5 12 4.5s-7 0-8.9.5A3 3 0 0 0 1 7.1 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.9 31 31 0 0 0-.5-4.9ZM9.8 15.3V8.7l5.8 3.3z"/></svg></a>
+    <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.6 22H2.4l7.3-8.4L1.8 2h6.4l4.5 6.7zm-1.1 18h1.7L7.3 3.9H5.5z"/></svg></a>
+   </div>
+  </div>
+  <div class="footer-col"><h4>Explore</h4><a href="https://timebill.indiacybercafe.com/">Home</a><a href="#features">Features</a><a href="#workflow">Workflow</a><a href="#plans">Plans</a><a href="https://play.google.com/store/apps/details?id=com.timebill.stopwatch">Android app</a></div>
+  <div class="footer-col"><h4>Resources</h4><a href="https://timebill.indiacybercafe.com/help-faq.html">Help & FAQ</a><a href="https://timebill.indiacybercafe.com/contact-support.html">Contact support</a><a href="https://timebill.indiacybercafe.com/report-issue.html">Report issue</a><a href="#faq">Common questions</a></div>
+  <div class="footer-col"><h4>Legal & contact</h4><a href="https://timebill.indiacybercafe.com/privacy-policy.html">Privacy policy</a><a href="https://timebill.indiacybercafe.com/terms-and-conditions.html">Terms & conditions</a><a href="https://timebill.indiacybercafe.com/disclaimer.html">Disclaimer</a><a href="mailto:support@timebill.indiacybercafe.com">Email support</a><a href="tel:+919203251821">+91 92032 51821</a></div>
+ </div>
+ <div class="footer-bottom"><span>© 2026 TimeBill. All rights reserved.</span><span>Track every minute. Bill every hour.</span></div>
+</div></footer>
+<script>
+(()=>{const menu=document.getElementById('menuBtn'),links=document.getElementById('navLinks');menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation')});links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation')}));if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'))}})();
+</script>
+</body>
+</html>
