@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TimeBill Stopwatch | Start Time Tracking</title>
+  <meta name="description" content="Track billable time with TimeBill. Start a stopwatch, calculate earnings at your hourly rate, select clients, and review saved sessions.">
+  <link rel="canonical" href="https://timebill.indiacybercafe.com/start.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TimeBill Stopwatch | Start Time Tracking">
+  <meta property="og:description" content="Track billable time and calculate earnings in real time with TimeBill.">
+  <meta property="og:url" content="https://timebill.indiacybercafe.com/start.html">
+  <meta property="og:image" content="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#F5ECDD">
+  <link rel="icon" type="image/png" href="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "TimeBill Stopwatch",
+      "url": "https://timebill.indiacybercafe.com/start.html",
+      "description": "A stopwatch and billing app for tracking work sessions and calculating earnings from an hourly rate.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #F5ECDD;
+      --surface: #F8F4EF;
+      --paper: #FFFBF7;
+      --ink: #2E1A17;
+      --muted: #7A6A63;
+      --gold: #D4AE7A;
+      --line: #E4D8C8;
+      --red: #E53935;
+      --green: #496A54;
+      font-family: Inter, sans-serif;
+      color: var(--ink);
+      background: var(--page);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; }
+    body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--page); }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .app-header {
+      position: sticky; top: 0; z-index: 5; display: flex; align-items: center;
+      justify-content: space-between; min-height: 68px; padding: 10px max(18px, calc((100vw - 1060px) / 2));
+      background: rgba(245, 236, 221, .94); border-bottom: 1px solid rgba(46, 26, 23, .08);
+      backdrop-filter: blur(16px);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; }
+    .brand img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-button {
+      display: grid; width: 42px; height: 42px; padding: 0; place-items: center; border: 0; border-radius: 50%;
+      background: transparent; cursor: pointer; transition: background .16s ease, transform .16s ease;
+    }
+    .icon-button:hover { background: rgba(74, 35, 31, .09); }
+    .icon-button:active { transform: scale(.94); }
+    .icon-button .material-symbols-outlined { font-size: 24px; }
+    .sync-status { color: var(--muted); font-size: 12px; margin-right: 7px; }
+    .sync-status[data-state="error"] { color: var(--red); }
+    main { width: min(100% - 36px, 960px); margin: 0 auto; padding: 34px 0 56px; }
+    .app-title { margin: 0 0 25px; font-size: 19px; line-height: 1.3; font-weight: 600; }
+    .tracking-layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 26px; align-items: stretch; }
+    .timer-panel { min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 20px; text-align: center; }
+    .timer-label { margin: 0 0 11px; color: var(--muted); font-size: 13px; font-weight: 500; }
+    .timer-display { margin: 0; font-variant-numeric: tabular-nums; font-size: clamp(42px, 9vw, 64px); line-height: 1.1; font-weight: 600; letter-spacing: 0; }
+    .earnings-label { margin: 24px 0 3px; color: var(--muted); font-size: 13px; }
+    .earnings-value { color: var(--ink); font-size: 26px; line-height: 1.25; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .timer-state { min-height: 18px; margin-top: 9px; color: var(--muted); font-size: 12px; }
+    .start-button {
+      width: 148px; height: 148px; margin-top: 30px; border: 5px solid var(--gold); border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+      background: var(--surface); color: var(--ink); box-shadow: 0 8px 22px rgba(46, 26, 23, .08); cursor: pointer;
+      transition: border-color .2s ease, transform .16s ease, background .2s ease;
+    }
+    .start-button:hover { transform: translateY(-2px); }
+    .start-button:active { transform: scale(.97); }
+    .start-button .material-symbols-outlined { font-size: 34px; }
+    .start-button.is-running { border-color: var(--red); }
+    .start-button.is-running .material-symbols-outlined { color: var(--red); }
+    .details-panel { align-self: center; padding: 25px 22px; background: var(--surface); border: 1px solid rgba(255,255,255,.7); border-radius: 12px; box-shadow: 0 5px 22px rgba(74,35,31,.05); }
+    .field { display: block; margin-bottom: 20px; }
+    .field-label { display: block; margin: 0 0 8px; color: var(--muted); font-size: 13px; font-weight: 500; }
+    .input-wrap { display: flex; align-items: center; min-height: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    .input-wrap:focus-within { outline: 2px solid rgba(134,80,72,.25); border-color: #865048; }
+    .input-wrap input { width: 100%; min-width: 0; padding: 12px 13px; border: 0; outline: 0; color: var(--ink); background: transparent; }
+    .input-wrap input::placeholder { color: #9B8B83; }
+    .field-icon { display: grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+    .rate-wrap { padding-left: 13px; color: var(--muted); }
+    .rate-wrap input { padding-left: 7px; }
+    .helper { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .wide-action { width: 100%; min-height: 46px; border: 0; border-radius: 8px; background: var(--ink); color: white; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .wide-action:hover { background: #4A231F; }
+    .wide-action:disabled { opacity: .6; cursor: wait; }
+    .secondary-action { width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid var(--line); border-radius: 8px; background: transparent; cursor: pointer; }
+    .secondary-action:hover { background: rgba(228,216,200,.3); }
+    .drawer-scrim { position: fixed; z-index: 8; inset: 0; background: rgba(24,16,14,.36); opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease; }
+    .drawer { position: fixed; z-index: 9; inset: 0 auto 0 0; width: min(310px, 86vw); padding: 24px 16px; background: var(--paper); box-shadow: 10px 0 35px rgba(35,20,16,.14); transform: translateX(-105%); transition: transform .22s ease; }
+    body.drawer-open .drawer { transform: translateX(0); }
+    body.drawer-open .drawer-scrim { opacity: 1; visibility: visible; }
+    .drawer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .drawer-link { width: 100%; display: flex; align-items: center; gap: 13px; min-height: 48px; padding: 0 12px; border: 0; border-radius: 7px; background: transparent; text-align: left; cursor: pointer; }
+    .drawer-link:hover, .drawer-link[aria-current="page"] { background: rgba(212,174,122,.2); }
+    .drawer-link .material-symbols-outlined { color: #6B3A33; }
+    dialog { width: min(520px, calc(100vw - 30px)); max-height: min(78vh, 700px); padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); box-shadow: 0 24px 70px rgba(36,20,16,.24); }
+    dialog::backdrop { background: rgba(28,18,16,.48); backdrop-filter: blur(2px); }
+    .dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 17px 19px; border-bottom: 1px solid var(--line); }
+    .dialog-head h2 { margin: 0; font-size: 17px; font-weight: 600; }
+    .dialog-content { max-height: calc(78vh - 65px); overflow: auto; padding: 18px 19px 21px; }
+    .list-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(228,216,200,.75); }
+    .list-row:last-child { border-bottom: 0; }
+    .list-main { min-width: 0; }
+    .list-title { display: block; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+    .list-subtitle { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .list-money { color: var(--green); white-space: nowrap; font-size: 14px; font-weight: 600; }
+    .small-button { flex: 0 0 auto; min-height: 36px; padding: 0 11px; border: 1px solid var(--line); border-radius: 7px; background: transparent; cursor: pointer; font-size: 12px; }
+    .small-button:hover { background: rgba(228,216,200,.35); }
+    .small-button.danger { color: #A22B27; }
+    .dialog-form { display: grid; gap: 14px; }
+    .dialog-form .field { margin: 0; }
+    .search-input { width: 100%; min-height: 42px; margin-bottom: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--ink); }
+    .empty-state { padding: 24px 8px; color: var(--muted); font-size: 13px; text-align: center; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .summary-value { padding: 15px; border-radius: 8px; background: var(--surface); }
+    .summary-value span { display: block; color: var(--muted); font-size: 12px; }
+    .summary-value strong { display: block; margin-top: 8px; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .toast { position: fixed; z-index: 12; left: 50%; bottom: 22px; max-width: calc(100vw - 28px); padding: 12px 17px; border-radius: 8px; background: var(--ink); color: white; font-size: 13px; box-shadow: 0 8px 25px rgba(0,0,0,.2); opacity: 0; transform: translate(-50%, 10px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 680px) {
+      .app-header { min-height: 62px; padding: 8px 14px; }
+      .brand { gap: 8px; font-size: 17px; }
+      .brand img { width: 33px; height: 33px; }
+      .header-actions { gap: 2px; }
+      .icon-button { width: 40px; height: 40px; }
+      .sync-status { max-width: 68px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 10px; }
+      main { width: min(100% - 28px, 460px); padding: 23px 0 35px; }
+      .app-title { margin-bottom: 12px; font-size: 16px; }
+      .tracking-layout { grid-template-columns: 1fr; gap: 17px; }
+      .timer-panel { min-height: 385px; padding: 21px 12px; }
+      .timer-display { font-size: clamp(42px, 13vw, 56px); }
+      .start-button { width: 136px; height: 136px; margin-top: 22px; }
+      .details-panel { padding: 20px 17px; }
+      .field { margin-bottom: 17px; }
+    }
+    @media (min-width: 681px) and (max-height: 760px) {
+      main { padding-top: 21px; }
+      .app-title { margin-bottom: 14px; }
+      .timer-panel { min-height: 430px; }
+      .start-button { width: 132px; height: 132px; margin-top: 20px; }
+    }
+    :root {
+      --page: #FFFFFF;
+      --surface: #FFFFFF;
+      --paper: #FFFFFF;
+      --muted: #4F4B52;
+      --line: #817D83;
+      font-family: Roboto, sans-serif;
+      background: var(--page);
+    }
+    body { background: #FFFFFF; }
+    .app-header {
+      justify-content: flex-start;
+      min-height: 80px;
+      padding: 0 24px;
+      background: #F5ECDD;
+      border-bottom: 1px solid #E4D8C8;
+      backdrop-filter: none;
+    }
+    .app-header > .icon-button { width: 42px; height: 48px; }
+    .app-header > .icon-button .material-symbols-outlined { font-size: 32px; font-variation-settings: "FILL" 0, "wght" 500; }
+    .app-header .brand { margin-left: 22px; gap: 0; font-size: 22px; font-weight: 600; }
+    .app-header .brand img { display: none; }
+    .header-actions { gap: 16px; margin-left: auto; }
+    .header-actions .icon-button { width: 42px; height: 48px; }
+    .header-actions .icon-button .material-symbols-outlined { font-size: 32px; font-variation-settings: "FILL" 0, "wght" 500; }
+    #header-play { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    #header-play .material-symbols-outlined { font-variation-settings: "FILL" 1, "wght" 500; }
+    .sync-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    main { width: min(100%, 820px); margin: 0 auto; padding: 70px 18px 48px; }
+    .app-title { margin: 0; }
+    .tracking-layout { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .timer-panel { width: 100%; min-height: 0; display: flex; flex-direction: column; align-items: center; padding: 0; }
+    .timer-label, .earnings-label { display: none; }
+    .start-button {
+      width: 152px; height: 152px; margin: 0; border: 4px solid var(--gold); border-radius: 50%;
+      background: #FFFFFF; box-shadow: none;
+      -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    }
+    .start-button .material-symbols-outlined { font-size: 60px; font-variation-settings: "FILL" 1, "wght" 500; }
+    .tracking-label { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+    .tracking-label { margin: 19px 0 0; color: var(--ink); font-size: 16px; line-height: 1.3; font-weight: 600; }
+    .timer-display { margin: 49px 0 0; font-size: clamp(46px, 14.5vw, 64px); line-height: 1.12; font-weight: 500; letter-spacing: 0; white-space: nowrap; }
+    .earnings-value { margin-top: 13px; color: var(--gold); font-size: 22px; line-height: 1.3; font-weight: 600; }
+    .timer-state { min-height: 0; margin: 0; }
+    .details-panel { width: 100%; max-width: 100%; margin-top: 49px; padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+    .field { position: relative; margin: 0 0 24px; }
+    .client-field .field-label { display: none; }
+    .input-wrap { min-height: 66px; border: 1px solid #817D83; border-radius: 5px; background: #FFFFFF; }
+    .input-wrap:focus-within { outline: 2px solid rgba(134,80,72,.25); border-color: #865048; }
+    .input-wrap input { padding: 0 6px; font-size: 19px; font-weight: 400; }
+    .input-wrap input::placeholder { color: #4F4B52; opacity: 1; }
+    .field-leading { display: grid; width: 52px; height: 64px; flex: 0 0 52px; margin-left: 12px; place-items: center; color: #81736D; font-size: 25px; }
+    .client-wrap .field-icon { width: 62px; height: 64px; flex: 0 0 62px; color: var(--gold); }
+    .client-wrap .field-icon .material-symbols-outlined { font-size: 30px; }
+    .rate-field .field-label { position: absolute; z-index: 1; top: -10px; left: 13px; margin: 0; padding: 0 5px; background: #FFFFFF; color: #4F4B52; font-size: 14px; line-height: 1.3; }
+    .rate-wrap { min-height: 66px; padding: 0 14px; color: var(--ink); }
+    .rate-wrap .field-leading { width: 42px; flex-basis: 42px; margin: 0 14px 0 0; }
+    .rate-wrap input { padding: 0; font-size: 19px; }
+    .helper, .wide-action, .secondary-action { display: none; }
+    @media (max-width: 680px) {
+      .app-header { min-height: 80px; padding: 0 20px; }
+      .app-header .brand { margin-left: 22px; font-size: 22px; }
+      .header-actions { gap: 16px; }
+      .sync-status { width: 1px; height: 1px; max-width: 0; font-size: 0; }
+      main { width: 100%; padding: 70px 17px 36px; }
+      .tracking-layout { gap: 0; }
+      .timer-panel { min-height: 0; padding: 0; }
+      .start-button { width: 152px; height: 152px; margin: 0; }
+      .timer-display { margin-top: 49px; font-size: clamp(46px, 14.5vw, 64px); }
+      .details-panel { margin-top: 49px; padding: 0; }
+      .field { margin-bottom: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <button class="icon-button" id="menu-button" type="button" aria-label="Open menu" title="Open menu"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
+    <a class="brand" href="/start.html" aria-label="TimeBill home"><img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt=""><span>TimeBill</span></a>
+    <div class="header-actions">
+      <span class="sync-status" id="sync-status" role="status">Connecting</span>
+      <button class="icon-button" id="header-play" type="button" aria-label="Start tracking" title="Start tracking"><span class="material-symbols-outlined" aria-hidden="true">play_arrow</span></button>
+      <button class="icon-button" id="history-button" type="button" aria-label="Open history" title="History"><span class="material-symbols-outlined" aria-hidden="true">history</span></button>
+    </div>
+  </header>
+
+  <div class="drawer-scrim" id="drawer-scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Main menu" aria-hidden="true">
+    <div class="drawer-top"><div class="brand"><img src="https://indiacybercafe.com/wp-content/uploads/2026/07/icon-1.png" alt=""><span>TimeBill</span></div><button class="icon-button" id="close-menu" type="button" aria-label="Close menu"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></div>
+    <button class="drawer-link" type="button" data-view="home" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">home</span>Home</button>
+    <button class="drawer-link" type="button" data-view="history"><span class="material-symbols-outlined" aria-hidden="true">history</span>History</button>
+    <button class="drawer-link" type="button" data-view="reports"><span class="material-symbols-outlined" aria-hidden="true">bar_chart</span>Reports</button>
+    <button class="drawer-link" type="button" data-view="clients"><span class="material-symbols-outlined" aria-hidden="true">group</span>Clients</button>
+    <a class="drawer-link" href="/help-faq.html"><span class="material-symbols-outlined" aria-hidden="true">help</span>Help &amp; FAQ</a>
+    <a class="drawer-link" href="/contact-support.html"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Contact</a>
+  </aside>
+
+  <main>
+    <section id="home-view" aria-labelledby="page-title">
+      <h1 class="app-title sr-only" id="page-title">TimeBill Stopwatch</h1>
+      <div class="tracking-layout">
+        <section class="timer-panel" aria-label="Live time tracking">
+          <button class="start-button" id="main-action" type="button" aria-label="Start tracking">
+            <span class="material-symbols-outlined" id="main-action-icon" aria-hidden="true">play_arrow</span>
+          </button>
+          <p class="tracking-label" id="main-action-label">Start Tracking</p>
+          <p class="timer-display" id="timer-display" aria-live="off">00:00:00</p>
+          <output class="earnings-value" id="earnings-value" aria-live="polite">₹0.00</output>
+          <p class="timer-state sr-only" id="timer-state" aria-live="polite">Ready to track</p>
+        </section>
+
+        <section class="details-panel" aria-label="Session details">
+          <label class="field client-field" for="client-name">
+            <span class="field-label">Client Name</span>
+            <span class="input-wrap client-wrap">
+              <span class="field-leading material-symbols-outlined" aria-hidden="true">person</span>
+              <input id="client-name" type="text" placeholder="Client Name" autocomplete="off" aria-label="Client Name" readonly>
+              <button class="field-icon" id="select-client" type="button" aria-label="Choose client" title="Choose client"><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></button>
+            </span>
+          </label>
+          <label class="field rate-field" for="hourly-rate">
+            <span class="field-label">Hourly Rate</span>
+            <span class="input-wrap rate-wrap"><span class="field-leading material-symbols-outlined" aria-hidden="true">credit_card</span><span aria-hidden="true">₹</span><input id="hourly-rate" type="text" inputmode="decimal" autocomplete="off" value="500" aria-label="Hourly rate in rupees"></span>
+          </label>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="action-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head"><h2 id="dialog-title"></h2><button class="icon-button" id="dialog-close" type="button" aria-label="Close dialog"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></div>
+    <div class="dialog-content" id="dialog-content"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module">
+    const databaseUrl = "https://timebill-icc-default-rtdb.firebaseio.com";
+    const guestStorageKey = "timebill_web_guest_id";
+    const guestId = localStorage.getItem(guestStorageKey) || `guest_${crypto.randomUUID().slice(0, 8)}`;
+    localStorage.setItem(guestStorageKey, guestId);
+    const rootPath = `users/${guestId}`;
+    const byId = (id) => document.getElementById(id);
+    const ui = {
+      timer: byId("timer-display"), earnings: byId("earnings-value"), state: byId("timer-state"),
+      action: byId("main-action"), actionIcon: byId("main-action-icon"), actionLabel: byId("main-action-label"),
+      headerPlay: byId("header-play"), rate: byId("hourly-rate"), client: byId("client-name"),
+      status: byId("sync-status"), dialog: byId("action-dialog"), dialogTitle: byId("dialog-title"),
+      dialogContent: byId("dialog-content"), toast: byId("toast")
+    };
+    let running = false;
+    let paused = false;
+    let startedAt = 0;
+    let accumulated = 0;
+    let sessionRate = 0;
+    let sessionClient = "";
+    let selectedView = "home";
+    let rateSaveTimer;
+    let toastTimer;
+    let clients = [];
+    let sessions = [];
+
+    function pathUrl(path) {
+      return `${databaseUrl}/${path.split("/").map(encodeURIComponent).join("/")}.json`;
+    }
+
+    async function databaseRequest(path, method = "GET", body) {
+      const response = await fetch(pathUrl(path), {
+        method,
+        headers: body === undefined ? undefined : { "Content-Type": "application/json" },
+        body: body === undefined ? undefined : JSON.stringify(body)
+      });
+      if (!response.ok) throw new Error(`Database request failed (${response.status})`);
+      return response.status === 204 ? null : response.json();
+    }
+
+    function setConnection(state, text) {
+      ui.status.dataset.state = state;
+      ui.status.textContent = text;
+    }
+
+    function showToast(message) {
+      ui.toast.textContent = message;
+      ui.toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => ui.toast.classList.remove("show"), 2800);
+    }
+
+    function elapsedMilliseconds() {
+      return accumulated + (running && !paused ? Date.now() - startedAt : 0);
+    }
+
+    function formatDuration(milliseconds) {
+      const seconds = Math.floor(milliseconds / 1000);
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor(seconds / 60) % 60;
+      return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+    }
+
+    function parseRate(value) {
+      const number = Number(value.trim().replace(",", "."));
+      return Number.isFinite(number) && number >= 0 ? number : 0;
+    }
+
+    function money(value) {
+      return `₹${Number(value || 0).toFixed(2)}`;
+    }
+
+    function renderTimer() {
+      const elapsed = elapsedMilliseconds();
+      ui.timer.textContent = formatDuration(elapsed);
+      ui.earnings.textContent = money((elapsed / 3600000) * (running ? sessionRate : parseRate(ui.rate.value)));
+      ui.action.classList.toggle("is-running", running);
+      ui.actionIcon.textContent = running ? "stop" : "play_arrow";
+      ui.actionLabel.textContent = running ? "Stop Tracking" : "Start Tracking";
+      ui.action.setAttribute("aria-label", running ? "Stop tracking and save session" : "Start tracking");
+      ui.headerPlay.querySelector(".material-symbols-outlined").textContent = running && !paused ? "pause" : "play_arrow";
+      ui.headerPlay.setAttribute("aria-label", running && !paused ? "Pause tracking" : paused ? "Resume tracking" : "Start tracking");
+      ui.headerPlay.title = running && !paused ? "Pause tracking" : paused ? "Resume tracking" : "Start tracking";
+      ui.state.textContent = running ? paused ? "Paused" : "Tracking in progress" : "Ready to track";
+    }
+
+    function toggleTimer() {
+      if (!running) {
+        sessionRate = parseRate(ui.rate.value);
+        sessionClient = ui.client.value.trim();
+        startedAt = Date.now();
+        accumulated = 0;
+        running = true;
+        paused = false;
+        renderTimer();
+        return;
+      }
+      if (paused) {
+        startedAt = Date.now();
+        paused = false;
+      } else {
+        accumulated += Date.now() - startedAt;
+        paused = true;
+      }
+      renderTimer();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[character]);
+    }
+
+    function openDialog(title, content) {
+      ui.dialogTitle.textContent = title;
+      ui.dialogContent.replaceChildren();
+      if (typeof content === "string") ui.dialogContent.innerHTML = content;
+      else ui.dialogContent.append(content);
+      if (!ui.dialog.open) ui.dialog.showModal();
+    }
+
+    function closeDrawer() {
+      document.body.classList.remove("drawer-open");
+      byId("drawer").setAttribute("aria-hidden", "true");
+    }
+
+    function openDrawer() {
+      document.body.classList.add("drawer-open");
+      byId("drawer").setAttribute("aria-hidden", "false");
+      byId("close-menu").focus();
+    }
+
+    async function refreshClients() {
+      const saved = await databaseRequest(`${rootPath}/clients`);
+      clients = saved ? Object.entries(saved).map(([id, client]) => ({ id, ...client })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)) : [];
+    }
+
+    async function chooseClient() {
+      try { await refreshClients(); }
+      catch { showToast("Could not load clients. Check your connection and try again."); return; }
+      const rows = clients.map((client) => `<div class="list-row"><div class="list-main"><span class="list-title">${escapeHtml(client.clientName || "Unnamed Client")}</span>${client.mobile ? `<span class="list-subtitle">${escapeHtml(client.mobile)}</span>` : ""}</div><button class="small-button" type="button" data-select-client="${escapeHtml(client.id)}">Select</button></div>`).join("");
+      openDialog("Select Client", `<input class="search-input" id="client-search" type="search" placeholder="Search clients" aria-label="Search clients"><div id="client-list">${rows || '<p class="empty-state">No saved clients yet.</p>'}</div><form class="dialog-form" id="new-client-form"><label class="field"><span class="field-label">Add Client</span><span class="input-wrap"><input name="clientName" required maxlength="100" placeholder="Client name"></span></label><button class="wide-action" type="submit">Save Client</button></form>`);
+      byId("client-search").addEventListener("input", (event) => {
+        const query = event.target.value.trim().toLowerCase();
+        byId("client-list").innerHTML = clients.filter((client) => `${client.clientName || ""} ${client.mobile || ""}`.toLowerCase().includes(query)).map((client) => `<div class="list-row"><div class="list-main"><span class="list-title">${escapeHtml(client.clientName || "Unnamed Client")}</span>${client.mobile ? `<span class="list-subtitle">${escapeHtml(client.mobile)}</span>` : ""}</div><button class="small-button" type="button" data-select-client="${escapeHtml(client.id)}">Select</button></div>`).join("") || '<p class="empty-state">No matching clients.</p>';
+      });
+      byId("new-client-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const clientName = new FormData(event.currentTarget).get("clientName").trim();
+        if (!clientName) return;
+        try {
+          await databaseRequest(`${rootPath}/clients`, "POST", { clientName, mobile: "", email: "", address: "", createdAt: Date.now(), updatedAt: Date.now() });
+          await refreshClients();
+          ui.client.value = clientName;
+          ui.dialog.close();
+          showToast("Client saved and selected.");
+        } catch { showToast("Could not save client. Check your connection and try again."); }
+      });
+    }
+
+    async function refreshSessions() {
+      const saved = await databaseRequest(`${rootPath}/sessions`);
+      sessions = saved ? Object.entries(saved).map(([id, session]) => ({ id, ...session })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)) : [];
+    }
+
+    function sessionRows(items) {
+      return items.map((session) => {
+        const stamp = Number(session.timestamp || session.createdAt || 0);
+        const date = stamp ? new Date(stamp).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }) : "Date unavailable";
+        return `<div class="list-row"><div class="list-main"><span class="list-title">${escapeHtml(session.clientName || "Unnamed Client")}</span><span class="list-subtitle">${escapeHtml(formatDuration(Number(session.durationMillis || 0)))} · ${escapeHtml(date)}</span></div><span class="list-money">${escapeHtml(money(session.earnings))}</span><button class="small-button danger" type="button" data-delete-session="${escapeHtml(session.id)}" aria-label="Delete session">Delete</button></div>`;
+      }).join("");
+    }
+
+    async function showHistory() {
+      try { await refreshSessions(); }
+      catch { showToast("Could not load session history. Check your connection and try again."); return; }
+      openDialog("Session History", `<input class="search-input" id="history-search" type="search" placeholder="Search by client" aria-label="Search sessions"><div id="session-list">${sessionRows(sessions) || '<p class="empty-state">No sessions recorded yet.</p>'}</div><button class="small-button danger" id="delete-all-sessions" type="button" ${sessions.length ? "" : "disabled"}>Delete All</button>`);
+      byId("history-search").addEventListener("input", (event) => {
+        const query = event.target.value.trim().toLowerCase();
+        const filtered = sessions.filter((session) => (session.clientName || "Unnamed Client").toLowerCase().includes(query));
+        byId("session-list").innerHTML = sessionRows(filtered) || '<p class="empty-state">No matching sessions.</p>';
+      });
+      byId("delete-all-sessions").addEventListener("click", async () => {
+        if (!sessions.length || !confirm("Delete all saved sessions? This cannot be undone.")) return;
+        try { await databaseRequest(`${rootPath}/sessions`, "DELETE"); await showHistory(); showToast("All sessions deleted."); }
+        catch { showToast("Could not delete sessions. Try again."); }
+      });
+    }
+
+    async function showReports() {
+      try { await refreshSessions(); }
+      catch { showToast("Could not load reports. Check your connection and try again."); return; }
+      const totalMillis = sessions.reduce((sum, session) => sum + Number(session.durationMillis || 0), 0);
+      const totalEarnings = sessions.reduce((sum, session) => sum + Number(session.earnings || 0), 0);
+      const today = new Date();
+      const todayEarnings = sessions.reduce((sum, session) => {
+        const date = new Date(Number(session.timestamp || 0));
+        return date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate() ? sum + Number(session.earnings || 0) : sum;
+      }, 0);
+      openDialog("Reports", `<div class="summary-grid"><div class="summary-value"><span>Total Hours</span><strong>${Math.floor(totalMillis / 3600000)}h ${Math.floor(totalMillis / 60000) % 60}m</strong></div><div class="summary-value"><span>Total Earnings</span><strong>${escapeHtml(money(totalEarnings))}</strong></div><div class="summary-value"><span>Total Sessions</span><strong>${sessions.length}</strong></div><div class="summary-value"><span>Today's Earnings</span><strong>${escapeHtml(money(todayEarnings))}</strong></div></div>`);
+    }
+
+    async function showClients() {
+      try { await refreshClients(); }
+      catch { showToast("Could not load clients. Check your connection and try again."); return; }
+      const rows = clients.map((client) => `<div class="list-row"><div class="list-main"><span class="list-title">${escapeHtml(client.clientName || "Unnamed Client")}</span>${client.mobile ? `<span class="list-subtitle">${escapeHtml(client.mobile)}</span>` : ""}</div><button class="small-button danger" type="button" data-delete-client="${escapeHtml(client.id)}">Delete</button></div>`).join("");
+      openDialog("Clients", `<div>${rows || '<p class="empty-state">No saved clients yet.</p>'}</div><form class="dialog-form" id="manage-client-form"><label class="field"><span class="field-label">Add Client</span><span class="input-wrap"><input name="clientName" required maxlength="100" placeholder="Client name"></span></label><button class="wide-action" type="submit">Save Client</button></form>`);
+      byId("manage-client-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const clientName = new FormData(event.currentTarget).get("clientName").trim();
+        if (!clientName) return;
+        try { await databaseRequest(`${rootPath}/clients`, "POST", { clientName, mobile: "", email: "", address: "", createdAt: Date.now(), updatedAt: Date.now() }); await showClients(); showToast("Client saved."); }
+        catch { showToast("Could not save client. Try again."); }
+      });
+    }
+
+    async function stopAndSave() {
+      if (!running) { toggleTimer(); return; }
+      const durationMillis = elapsedMilliseconds();
+      const endTime = Date.now();
+      const session = {
+        clientName: sessionClient,
+        hourlyRate: sessionRate,
+        startTime: endTime - durationMillis,
+        endTime,
+        durationMillis,
+        earnings: (durationMillis / 3600000) * sessionRate,
+        status: "Work Completed",
+        createdAt: endTime,
+        timestamp: endTime
+      };
+      running = false;
+      paused = false;
+      accumulated = 0;
+      startedAt = 0;
+      renderTimer();
+      try {
+        await databaseRequest(`${rootPath}/sessions`, "POST", session);
+        showToast(`Session saved · ${money(session.earnings)}`);
+      } catch {
+        showToast("Session could not be saved. Check your connection and try again.");
+      }
+    }
+
+    byId("dialog-close").addEventListener("click", () => ui.dialog.close());
+    ui.dialog.addEventListener("click", (event) => { if (event.target === ui.dialog) ui.dialog.close(); });
+    ui.dialogContent.addEventListener("click", async (event) => {
+      const select = event.target.closest("[data-select-client]");
+      if (select) {
+        const client = clients.find((item) => item.id === select.dataset.selectClient);
+        if (client) ui.client.value = client.clientName || "";
+        ui.dialog.close();
+      }
+      const deleteSession = event.target.closest("[data-delete-session]");
+      if (deleteSession && confirm("Delete this session?")) {
+        try { await databaseRequest(`${rootPath}/sessions/${deleteSession.dataset.deleteSession}`, "DELETE"); await showHistory(); }
+        catch { showToast("Could not delete the session. Try again."); }
+      }
+      const deleteClient = event.target.closest("[data-delete-client]");
+      if (deleteClient && confirm("Delete this client?")) {
+        try { await databaseRequest(`${rootPath}/clients/${deleteClient.dataset.deleteClient}`, "DELETE"); await showClients(); }
+        catch { showToast("Could not delete the client. Try again."); }
+      }
+    });
+
+    byId("main-action").addEventListener("click", stopAndSave);
+    byId("header-play").addEventListener("click", toggleTimer);
+    byId("history-button").addEventListener("click", showHistory);
+    byId("select-client").addEventListener("click", chooseClient);
+    ui.client.addEventListener("click", chooseClient);
+    byId("menu-button").addEventListener("click", openDrawer);
+    byId("close-menu").addEventListener("click", closeDrawer);
+    byId("drawer-scrim").addEventListener("click", closeDrawer);
+    document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => {
+      selectedView = button.dataset.view;
+      document.querySelectorAll("[data-view]").forEach((item) => item.removeAttribute("aria-current"));
+      button.setAttribute("aria-current", "page");
+      closeDrawer();
+      if (selectedView === "home" && ui.dialog.open) ui.dialog.close();
+      if (selectedView === "history") showHistory();
+      if (selectedView === "reports") showReports();
+      if (selectedView === "clients") showClients();
+    }));
+
+    ui.rate.addEventListener("input", () => {
+      renderTimer();
+      clearTimeout(rateSaveTimer);
+      rateSaveTimer = setTimeout(async () => {
+        try { await databaseRequest(`${rootPath}/profile/defaultHourlyRate`, "PUT", parseRate(ui.rate.value)); setConnection("ok", "Synced"); }
+        catch { setConnection("error", "Offline"); }
+      }, 450);
+    });
+    ui.rate.addEventListener("blur", () => {
+      const rate = parseRate(ui.rate.value);
+      ui.rate.value = rate === 0 ? "" : Number.isInteger(rate) ? String(rate) : rate.toFixed(2);
+      renderTimer();
+    });
+    ui.rate.addEventListener("keydown", (event) => { if (event.key === "Enter") ui.rate.blur(); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeDrawer(); });
+
+    async function initialize() {
+      renderTimer();
+      try {
+        const savedRate = await databaseRequest(`${rootPath}/profile/defaultHourlyRate`);
+        if (typeof savedRate === "number" && savedRate > 0) ui.rate.value = Number.isInteger(savedRate) ? String(savedRate) : savedRate.toFixed(2);
+        setConnection("ok", "Synced");
+      } catch {
+        setConnection("error", "Offline");
+        showToast("Could not connect to TimeBill sync. Check your connection.");
+      }
+      renderTimer();
+    }
+
+    setInterval(renderTimer, 250);
+    initialize();
+  </script>
+</body>
+</html>
